@@ -1,0 +1,44 @@
+{% extends "BetNow/layout.html" %}
+
+{% block body %}
+    <main>
+        <img src="{{ Bet_Inicio }}" alt="Bets" class="bets-image">
+        <p class="Sobre_BetNow">Bet Now es una plataforma de apuestas en línea que ofrece una amplia variedad de opciones para los aficionados a los juegos de azar en deportes populares como el fútbol, baloncesto y tenis. Con una interfaz intuitiva y fácil de usar, los usuarios pueden explorar diferentes opciones de apuestas y hacer sus elecciones en cuestión de segundos. Bet Now ofrece una emocionante experiencia de apuestas deportivas, con una amplia variedad de opciones de apuestas en cada partido, incluyendo apuestas en vivo y apuestas a largo plazo en torneos y campeonatos.
+
+            Bet Now es una plataforma confiable para aquellos interesados en las apuestas deportivas. Con una amplia variedad de opciones de apuestas en deportes populares como el fútbol, baloncesto y tenis, así como juegos de casino en vivo, Bet Now ofrece una experiencia de juego emocionante y accesible para todos los usuarios. Además, su interfaz intuitiva, múltiples opciones de depósito y retiro de fondos y servicio de atención al cliente de alta calidad hacen de Bet Now una opción sólida para aquellos que buscan una plataforma de apuestas en línea confiable.
+        </p>
+        <div class="horizontal-bar">
+            <h1 class="sports-hor-bar">DEPORTES</h1>
+        </div>
+        <div class="sports">
+            <div class="sport-wrapper" data-sport="Soccer">
+                <img src="{{ Futbol }}" alt="Soccer">
+                <span>Soccer</span>
+            </div>
+            <div class="sport-wrapper" data-sport="Basketball">
+                <img src="{{ Basketball }}" alt="Basketball">
+                <span>Basketball</span>
+            </div>
+            <div class="sport-wrapper" data-sport="Tennis">
+                <img src="{{ Tennis }}" alt="Tennis">
+                <span>Tennis</span>
+            </div>
+        </div>        
+    </main>
+    <footer>
+        <p>Bet Now © 2023. Todos los derechos reservados.
+
+            Bet Now es una plataforma de apuestas deportivas en línea que ofrece oportunidades de apuestas en fútbol, baloncesto y tenis. Nos esforzamos por proporcionar un servicio seguro y justo para todos nuestros usuarios, garantizando un juego responsable en todo momento.
+            
+            Al utilizar este sitio web, usted acepta nuestros Términos y Condiciones y nuestra Política de Privacidad. Para obtener más información, consulte los enlaces a continuación:
+            
+            Términos y Condiciones
+            Política de Privacidad
+            Juego Responsable
+            Preguntas Frecuentes
+            Contacto
+            Para cualquier pregunta o inquietud, no dude en ponerse en contacto con nuestro equipo de atención al cliente a través de los canales de comunicación proporcionados en nuestro sitio web.
+            
+            Bet Now opera bajo las leyes y regulaciones del país en el que está registrada y licenciada. Por favor, juegue de manera responsable y solo si tiene al menos 18 años de edad y cumple con las leyes de apuestas aplicables en su jurisdicción.</p>
+    </footer>
+{% endblock %}

@@ -1,0 +1,263 @@
+body {
+    background-image: url("/static/BetNow/Fondo.svg");
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #00BF63;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo img {
+    width: 150px;
+}
+
+.logo {
+    transition: all 0.3s;
+}
+
+@keyframes rotateAndJump {
+    0% {
+        transform: translateY(0) rotate(0);
+    }
+    25% {
+        transform: translateY(-10px) rotate(90deg);
+    }
+    50% {
+        transform: translateY(0) rotate(180deg);
+    }
+    75% {
+        transform: translateY(-10px) rotate(270deg);
+    }
+    100% {
+        transform: translateY(0) rotate(360deg);
+    }
+}
+
+.logo:hover {
+    animation: rotateAndJump 1s linear forwards;
+}
+
+.login input {
+    margin-right: 5px;
+}
+
+.login-btn, .signup-btn {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.signup-btn {
+    margin-left: 5px;
+}
+
+.btn-registro{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.forgot-password {
+    display: block;
+    font-size: 12px;
+    text-align: right;
+}
+  
+.nav_button {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+nav {
+    background-color: #FF5757;
+    display: flex;
+    border: 1px solid black;
+}
+
+nav a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    padding: 10px;
+    display: inline-block;
+}
+
+nav a:hover {
+    background-color: #D83131;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+
+.bets-image {
+    width: 45%;
+}
+
+.Sobre_BetNow {
+    width: 45%;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+
+.horizontal-bar {
+    background-color: #C7633A;
+    width: 100%;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sports-hor-bar{
+    text-shadow: 
+    -1px -1px 0 #00BF63,
+    1px -1px 0 #00BF63,
+    -1px  1px 0 #00BF63,
+    1px  1px 0 #00BF63
+}
+
+.sports {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 0;
+}
+
+.sport-wrapper {
+    width: 33.333%;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.sport-wrapper img {
+    width: 100%;
+}
+
+.sport-wrapper span {
+    font-size: 45px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px;
+    font-weight: bold;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.sport-wrapper:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.sport-wrapper:hover span {
+    text-shadow: 
+    -1px -1px 0 #d03827,
+    1px -1px 0 #d03827,
+    -1px  1px 0 #d03827,
+    1px  1px 0 #d03827;
+    visibility: visible;
+    opacity: 1;
+    z-index: 11;
+}
+
+.sport-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.sport-wrapper:hover::after {
+    opacity: 0.6;
+}
+
+#registration-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+#first-name, #last-name, #password, #email, #address,#document-number,#city,
+input[type="tel"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.phone-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.phone-container label,
+.phone-container select,
+.phone-container input[type="tel"] {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.phone-container input[type="tel"] {
+    margin-right: 0;
+}
+
+footer {
+    background-color: lightgray;
+    padding: 1px;
+    text-align: justify;
+    text-align: center;
+    font-size: 6px;
+}
+
