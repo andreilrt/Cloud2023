@@ -1,0 +1,19 @@
+<label for="colombian-banks">Bancos de Colombia</label>
+<select id="colombian-banks">
+    <option value="" disabled selected hidden>Seleccionar un banco</option>
+    {% include 'BetNow/bankslist.html' %}
+</select>
+<div id="bank-account-info">
+    <label for="account-name">Nombre del titular</label>
+    <input type="text" id="account-name" required>
+
+    <label for="account-number">Número de cuenta</label>
+    <input type="text" id="account-number" required>
+
+    <label for="account-type">Tipo de cuenta</label>
+    <select id="account-type">
+        <option value="" disabled selected hidden>Seleccionar el tipo de cuenta</option>
+        <option value="savings">Ahorros</option>
+        <option value="current">Corriente</option>
+    </select>
+</div>

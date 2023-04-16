@@ -112,6 +112,7 @@ main {
 .Sobre_BetNow {
     width: 45%;
     background-color: rgba(255, 255, 255, 0.7);
+    text-align: justify;
 }
 
 
@@ -194,12 +195,12 @@ main {
     opacity: 0.6;
 }
 
-#registration-form {
+form {
     background-color: white;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
+    max-width: 700px;
     width: 100%;
 }
 
@@ -209,7 +210,12 @@ label {
     margin: 10px 0;
 }
 
-#first-name, #last-name, #password, #email, #address,#document-number,#city,
+#first-name, #last-name, #password, 
+#email, #address,#document-number,
+#city,#pse-email, #account-name,
+#account-number,#pse-document-number,
+#pse-first-name,#pse-last-name,#cardholder-name,
+#card-number,#cvv,
 input[type="tel"],
 input[type="date"],
 select {
@@ -217,6 +223,21 @@ select {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 3px;
+    font-size: 14px;
+}
+
+.error{
+    color: red;
+}
+
+#expiration-date-card{
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    width: 100%; 
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 3px; 
     font-size: 14px;
 }
 

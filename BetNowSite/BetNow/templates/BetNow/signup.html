@@ -1,4 +1,5 @@
 {% extends "BetNow/layout.html" %}
+{% load static %}
 
 {% block body %}
     <main>
@@ -268,7 +269,7 @@
             <label for="phone">Celular*</label>
             <div class="phone-container">
                 <label for="phone-prefix">Indicativo</label>
-                <select id="phone-prefix">
+                <select id="phone-prefix" required>
                     <option value="+57">+57 (Colombia)</option>
                     <optgroup label="-----------------------------------------">
                         <option data-countryCode="DZ" value="213">Algeria (+213)</option>
@@ -488,7 +489,7 @@
                     </optgroup>
                 </select>
                 <label for="phone">Número de celular</label>
-                <input type="tel" id="phone">
+                <input type="tel" id="phone" required>
             </div>
     
             <label for="document-type">Documento*</label>
@@ -499,41 +500,32 @@
             </select>
     
             <label for="document-number">Número de documento</label>
-            <input type="text" id="document-number">
-    
+            <input type="text" id="document-number" required>
+
             <label for="issue-date">Fecha de expedición*</label>
             <input type="date" id="issue-date" required>
     
             <label for="payment-method">Medios de transferencia</label>
             <select id="payment-method">
+                <option value="" disabled selected hidden>Seleccionar medio de transferencia</option>
                 <option value="banks">Bancos</option>
                 <option value="pse">PSE</option>
                 <option value="card">Tarjeta</option>
             </select>
-    
-            <!-- Add the logic for displaying the list of banks or the payment panel based on the selected payment method -->
-    
-            <div id="payment-panel">
-                <!-- Display the list of banks or other payment details -->
+            <script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
+            <div id="banks-panel" class="payment-panel" style="display:none;">
+                {% include 'BetNow/banks.html' %}
+            </div>
+            
+            <div id="pse-panel" class="payment-panel" style="display:none;">
+                {% include 'BetNow/pse.html' %}
+            </div>
+
+            <div id="card-panel" class="payment-panel" style="display:none;">
+                {% include 'BetNow/tarjeta.html' %}
             </div>
     
             <button type="submit">Enviar</button>
         </form>
     </main>
-    <footer>
-        <p>Bet Now © 2023. Todos los derechos reservados.
-
-            Bet Now es una plataforma de apuestas deportivas en línea que ofrece oportunidades de apuestas en fútbol, baloncesto y tenis. Nos esforzamos por proporcionar un servicio seguro y justo para todos nuestros usuarios, garantizando un juego responsable en todo momento.
-            
-            Al utilizar este sitio web, usted acepta nuestros Términos y Condiciones y nuestra Política de Privacidad. Para obtener más información, consulte los enlaces a continuación:
-            
-            Términos y Condiciones
-            Política de Privacidad
-            Juego Responsable
-            Preguntas Frecuentes
-            Contacto
-            Para cualquier pregunta o inquietud, no dude en ponerse en contacto con nuestro equipo de atención al cliente a través de los canales de comunicación proporcionados en nuestro sitio web.
-            
-            Bet Now opera bajo las leyes y regulaciones del país en el que está registrada y licenciada. Por favor, juegue de manera responsable y solo si tiene al menos 18 años de edad y cumple con las leyes de apuestas aplicables en su jurisdicción.</p>
-    </footer>
 {% endblock %}

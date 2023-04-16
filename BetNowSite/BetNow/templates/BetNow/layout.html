@@ -4,9 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'BetNow/style.css' %}">
+    <link rel="stylesheet" href="{% static 'BetNow/css/style.css' %}">
     <title>Bet Now</title>
     <link rel = "icon" href="{{ logo }}" type ="img/icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- CSRF Setup Script -->
+    <script>
+        // Add this code to make the CSRF token available for AJAX requests
+        var csrftoken = '{{ csrf_token }}';
+
+        function csrfSafeMethod(method) {
+            // These HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -30,5 +49,21 @@
     {% block body %}
 
     {% endblock %}
+    <footer>
+        <p>Bet Now © 2023. Todos los derechos reservados.
+
+            Bet Now es una plataforma de apuestas deportivas en línea que ofrece oportunidades de apuestas en fútbol, baloncesto y tenis. Nos esforzamos por proporcionar un servicio seguro y justo para todos nuestros usuarios, garantizando un juego responsable en todo momento.
+            
+            Al utilizar este sitio web, usted acepta nuestros Términos y Condiciones y nuestra Política de Privacidad. Para obtener más información, consulte los enlaces a continuación:
+            
+            Términos y Condiciones
+            Política de Privacidad
+            Juego Responsable
+            Preguntas Frecuentes
+            Contacto
+            Para cualquier pregunta o inquietud, no dude en ponerse en contacto con nuestro equipo de atención al cliente a través de los canales de comunicación proporcionados en nuestro sitio web.
+            
+            Bet Now opera bajo las leyes y regulaciones del país en el que está registrada y licenciada. Por favor, juegue de manera responsable y solo si tiene al menos 18 años de edad y cumple con las leyes de apuestas aplicables en su jurisdicción.</p>
+    </footer>
 </body>
 </html>
