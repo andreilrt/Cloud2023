@@ -1,5 +1,5 @@
 body {
-    background-image: url("/static/BetNow/Fondo.svg");
+    background-image: url("/static/BetNow/css/Fondo.svg");
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -215,7 +215,7 @@ label {
 #city,#pse-email, #account-name,
 #account-number,#pse-document-number,
 #pse-first-name,#pse-last-name,#cardholder-name,
-#card-number,#cvv,
+#card-number,
 input[type="tel"],
 input[type="date"],
 select {
@@ -228,17 +228,6 @@ select {
 
 .error{
     color: red;
-}
-
-#expiration-date-card{
-    appearance: none; 
-    -webkit-appearance: none; 
-    -moz-appearance: none; 
-    width: 100%; 
-    padding: 5px; 
-    border: 1px solid #ccc; 
-    border-radius: 3px; 
-    font-size: 14px;
 }
 
 button[type="submit"] {
