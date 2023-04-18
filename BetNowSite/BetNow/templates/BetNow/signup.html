@@ -1,6 +1,9 @@
 {% extends "BetNow/layout.html" %}
+{% load static %}
 
 {% block body %}
+    <script src="{% static 'BetNow/js/showpass.js' %}"></script>
+    <script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
     <main>
         <form id="registration-form">
             <label for="first-name">Nombres*</label>
