@@ -210,6 +210,10 @@ label {
     margin: 10px 0;
 }
 
+#cvv{
+    width: 30%;
+}
+
 #first-name, #last-name, #password, 
 #email, #address,#document-number,
 #city,#pse-email, #account-name,
