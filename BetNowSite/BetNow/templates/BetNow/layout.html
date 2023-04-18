@@ -8,24 +8,7 @@
     <title>Bet Now</title>
     <link rel = "icon" href="{{ logo }}" type ="img/icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- CSRF Setup Script -->
-    <script>
-        // Add this code to make the CSRF token available for AJAX requests
-        var csrftoken = '{{ csrf_token }}';
-
-        function csrfSafeMethod(method) {
-            // These HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-    </script>
+    <script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
 </head>
 <body>
     <header>

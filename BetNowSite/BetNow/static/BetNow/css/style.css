@@ -230,6 +230,10 @@ select {
     font-size: 14px;
 }
 
+#label-show-password{
+    size: 10px;
+}
+
 .error{
     color: red;
 }

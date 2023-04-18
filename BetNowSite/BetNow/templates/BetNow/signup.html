@@ -1,5 +1,4 @@
 {% extends "BetNow/layout.html" %}
-{% load static %}
 
 {% block body %}
     <main>
@@ -12,11 +11,12 @@
     
             <label for="password">Contraseña*</label>
             <input type="password" id="password" required>
-            <label for="show-password">
+            <label for="show-password" id="label-show-password">
                 <input type="checkbox" id="show-password">
                 Mostrar contraseña
             </label>
-            <script src="{% static 'BetNow/js/showpassword.js' %}"></script>
+            <label for="password">Contraseña*</label>
+
             <label for="country">País*</label>
             <select id="country" required>
                 <option value="CO" selected>Colombia</option>
@@ -259,8 +259,6 @@
                 
             </select>
     
-            <!-- Add the logic for updating the list of cities based on the selected country -->
-    
             <label for="city">Ciudad*</label>
             <input type="text" id="city" required>
     
@@ -500,7 +498,6 @@
                 <option value="" disabled selected hidden>Seleccionar tipo de documento</option>
                 <option value="id_card">Cédula</option>
                 <option value="passport">Pasaporte</option>
-                <!-- Add more document types as needed -->
             </select>
     
             <label for="document-number">Número de documento*</label>
@@ -516,7 +513,6 @@
                 <option value="pse">PSE</option>
                 <option value="card">Tarjeta</option>
             </select>
-            <script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
             <div id="banks-panel" class="payment-panel" style="display:none;">
                 {% include 'BetNow/banks.html' %}
             </div>
