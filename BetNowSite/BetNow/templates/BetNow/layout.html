@@ -8,7 +8,7 @@
     <title>Bet Now</title>
     <link rel = "icon" href="{{ logo }}" type ="img/icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
+    <script src="{% static 'BetNow/js/csrf.js' %}"></script>
 </head>
 <body>
     <header>
@@ -49,4 +49,6 @@
             Bet Now opera bajo las leyes y regulaciones del país en el que está registrada y licenciada. Por favor, juegue de manera responsable y solo si tiene al menos 18 años de edad y cumple con las leyes de apuestas aplicables en su jurisdicción.</p>
     </footer>
 </body>
+<script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
+<script src="{% static 'BetNow/js/showpass.js' %}"></script>
 </html>

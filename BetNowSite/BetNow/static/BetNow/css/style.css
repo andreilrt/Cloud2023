@@ -204,6 +204,12 @@ form {
     width: 100%;
 }
 
+label[for="show-password"] {
+    font-style: italic;
+    font-size: smaller;
+    font-weight: normal;
+}
+  
 label {
     display: block;
     font-weight: bold;
@@ -228,10 +234,6 @@ select {
     border: 1px solid #ccc;
     border-radius: 3px;
     font-size: 14px;
-}
-
-#label-show-password{
-    size: 10px;
 }
 
 .error{
