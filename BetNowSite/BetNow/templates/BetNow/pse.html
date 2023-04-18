@@ -1,20 +1,20 @@
-<label for="pse-bank">Banco:</label>
+<label for="pse-bank">Banco*</label>
 <select id="pse-bank" name="pse-bank">
     <option value="" disabled selected hidden>Seleccionar banco</option>
     {% include 'BetNow/bankslist.html' %}
 </select>
 
-<label for="pse-account-type">Tipo de cuenta:</label>
+<label for="pse-account-type">Tipo de cuenta*</label>
 <select id="pse-account-type" name="pse-account-type">
     <option value="" disabled selected hidden>Seleccionar tipo de cuenta</option>
     <option value="savings">Ahorros</option>
     <option value="checking">Corriente</option>
 </select>
 
-<label for="pse-document-type">Tipo de documento:</label>
+<label for="pse-document-type">Tipo de documento*</label>
 <select id="pse-document-type" name="pse-document-type">
     <option value="" disabled selected hidden>Seleccionar tipo de documento</option>
-    <option value="id">Cédula de Ciudadanía</option>
+    <option value="id">Cédula</option>
     <option value="passport">Pasaporte</option>
 </select>
 
