@@ -12,7 +12,11 @@
     
             <label for="password">Contraseña*</label>
             <input type="password" id="password" required>
-    
+            <label for="show-password">
+                <input type="checkbox" id="show-password">
+                Mostrar contraseña
+            </label>
+            <script src="{% static 'BetNow/js/showpassword.js' %}"></script>
             <label for="country">País*</label>
             <select id="country" required>
                 <option value="CO" selected>Colombia</option>
