@@ -18,3 +18,10 @@ def Registro(request):
         'logo': '/static/BetNow/img/logo.svg',
     }
     return render(request,"BetNow/signup.html", context)
+
+def usuario_inicio(request):
+    context = {
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'logo': '/static/BetNow/img/logo.svg',
+    }
+    return render(request, "BetNow/usuario_inicio.html", context)
