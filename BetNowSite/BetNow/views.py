@@ -21,6 +21,11 @@ def Registro(request):
 
 def usuario_inicio(request):
     context = {
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'logo': '/static/BetNow/img/logo.svg',
     }
