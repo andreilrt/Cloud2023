@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'BetNowSite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'BetNowDB',
+        'USER': 'Admin',
+        'PASSWORD': 'Nube2023',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

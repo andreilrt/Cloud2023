@@ -292,3 +292,10 @@ footer {
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
+
+.welcome h3 {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+}
