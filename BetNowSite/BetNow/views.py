@@ -38,16 +38,13 @@ def usuario_inicio(request):
 
         # Create a new Perfil object with the extracted values
         perfil = Perfil.objects.create(nombres=nombres, apellidos=apellidos, password=password, pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
-
-        # Redirect to the success page
-        return redirect('BetNow/usuario_inicio.html')
+        perfil.save()
     context = {
+        'logo': '/static/BetNow/img/logo.svg',
         'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
         'Tennis': '/static/BetNow/img/Tennis.svg',
-        'Avatar': '/static/BetNow/img/Avatar.svg',
-        'logo': '/static/BetNow/img/logo.svg',
     }
-    return render(request, "BetNow/Registro.html", context)
+    return render(request, "BetNow/usuario_inicio.html", context)
