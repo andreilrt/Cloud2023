@@ -46,5 +46,6 @@ def usuario_inicio(request):
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
         'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg'
     }
     return render(request, "BetNow/usuario_inicio.html", context)

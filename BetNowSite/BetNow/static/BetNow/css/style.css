@@ -282,7 +282,7 @@ footer {
     font-size: 6px;
 }
 
-.user-avatar {
+.welcome ,.user-avatar {
     position: fixed;
     top: 1rem;
     right: 1rem;
@@ -291,11 +291,4 @@ footer {
     height: 50px;
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.welcome h3 {
-    position: fixed;
-    top: 1rem;
-    right: 55rem;
-    float: right;
 }

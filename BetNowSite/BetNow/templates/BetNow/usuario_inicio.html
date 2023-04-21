@@ -14,6 +14,14 @@
         </div>
     </header>
 {% endblock %}
+{% block nav %}
+    <nav>
+        <a href="{% url 'Usuario' %}" class="nav_button"><strong>Inicio</strong></a>
+        <a href="#" class="nav_button"><strong>Consultar Apuestas</strong></a>
+        <a href="#" class="nav_button"><strong>Consultar Mis Apuestas</strong></a>
+        <a href="#" class="nav_button"><strong>Ligas</strong></a>
+    </nav>
+{% endblock %}
 {% block body %}
 {% include 'BetNow/bodyini.html' %}
 {% endblock %}
