@@ -17,10 +17,16 @@
             <img src="{{ logo }}" alt="Logo" class="logo">
         </div>
         <div class="login">
-            <input type="email" placeholder="Email">
-            <input type="password" placeholder="Password">
-            <button class="login-btn">Log in</button>
-            <button class="signup-btn" > <a href="{% url 'Registro' %}" class="btn-registro">Sign up</a></button>
+            <form method="POST" action="{% url 'index' %}" id="login_form">
+                {% csrf_token %}
+                <input type="email" placeholder="Email" name="email">
+                <input type="password" placeholder="Password" name="password">
+                <button class="login-btn">Log in</button>
+                <button class="signup-btn" > <a href="{% url 'Registro' %}" class="btn-registro">Sign up</a></button>
+                {% if error_message %}
+                    <p class="error-message">{{ error_message }}</p>
+                {% endif %}
+            </form>
             <a href="#" class="forgot-password">Forgot password?</a>
         </div>
     </header>

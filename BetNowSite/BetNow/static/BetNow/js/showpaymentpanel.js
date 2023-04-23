@@ -48,4 +48,15 @@ $(document).ready(function () {
             $(".invalid-feedback").empty();
         }
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const avatar = document.querySelector(".user-avatar");
+        const optionsContainer = document.querySelector(".user-options-container");
+        
+        avatar.addEventListener("click", function() {
+          optionsContainer.classList.toggle("active");
+        });
+    });
+      
+    
 });

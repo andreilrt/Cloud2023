@@ -5,7 +5,7 @@
     <script src="{% static 'BetNow/js/showpass.js' %}"></script>
     <script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
     <main>
-        <form id="registration-form" method="POST" action="{% url 'Usuario' %}">
+        <form id="registration-form" method="POST" action="{% url 'Registro' %}">
             {% csrf_token %}
             <label for="first-name">Nombres*</label>
             <input type="text" id="first-name" name="first-name" required>
