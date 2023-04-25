@@ -1,10 +1,12 @@
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from .models import Perfil
 
 # Create your views here.
+
+@user_passes_test(lambda u: not u.is_authenticated, login_url='inicio')
 def index(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -38,6 +40,7 @@ def index(request):
         }
         return render(request, "BetNow/index.html", context)
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='inicio')
 def Registro(request):
     if request.method == 'POST':
         # Extract the values of the form fields from the request.POST dictionary
