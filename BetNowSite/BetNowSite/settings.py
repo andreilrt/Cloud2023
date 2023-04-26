@@ -127,6 +127,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTHENTICATION_BACKENDS = [    'django.contrib.auth.backends.ModelBackend',    'BetNowSite.auth_backend.PerfilAuthBackend']
+AUTHENTICATION_BACKENDS = [    'django.contrib.auth.backends.ModelBackend',    'BetNowSite.auth_backend.UserAuthBackend']
 
 LOGIN_URL = 'index'

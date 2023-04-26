@@ -1,22 +1,22 @@
 from django.contrib.auth.backends import BaseBackend
-from BetNow.models import Perfil
+from BetNow.models import User
 
-class PerfilAuthBackend(BaseBackend):
+class UserAuthBackend(BaseBackend):
     def authenticate(self, request, email=None, password=None, **kwargs):
         try:
-            perfil = Perfil.objects.get(email=email)
-        except Perfil.DoesNotExist:
+            User = User.objects.get(email=email)
+        except User.DoesNotExist:
             return None
 
-        if perfil.password == password:
-            return perfil
+        if User.password == password:
+            return User
         else:
             return None
 
     def get_user(self, user_id):
         try:
-            return Perfil.objects.get(pk=user_id)
-        except Perfil.DoesNotExist:
+            return User.objects.get(pk=user_id)
+        except User.DoesNotExist:
             return None
 
 

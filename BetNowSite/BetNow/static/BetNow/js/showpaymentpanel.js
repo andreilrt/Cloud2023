@@ -7,6 +7,9 @@ $(document).ready(function () {
         $(".payment-panel").hide();
         if (selectedPaymentMethod === "banks") {
             // Show the banks panel
+            $("#account-name").prop("required", true);
+            $("#account-number").prop("required", true);
+            $("#account-type").prop("required", true);
             $("#banks-panel").show();
         } else if (selectedPaymentMethod === "pse") {
             // Show the PSE panel

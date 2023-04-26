@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
-from .models import Perfil
+from .models import User
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -12,10 +13,10 @@ def index(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        perfil = authenticate(request, email=email, password=password)
-        if perfil is not None:
-            login(request, perfil)
-            perfil.backend = 'BetNow.backends.PerfilAuthBackend'
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            user.backend = 'BetNow.backends.userAuthBackend'
             return redirect('inicio')
         else:
             error_message = "Email o contraseña invalidos, por favor intente de nuevo."
@@ -57,9 +58,9 @@ def Registro(request):
         numero_documento = request.POST['document-number']
         fecha_expedicion = request.POST['issue-date']
 
-        # Create a new Perfil object with the extracted values
-        perfil = Perfil.objects.create(nombres=nombres, apellidos=apellidos, password=password, pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
-        perfil.save()
+        # Create a new user object with the extracted values
+        user = user.objects.create(nombres=nombres, apellidos=apellidos, password=password, pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
+        user.save()
         context = {
             'logo': '/static/BetNow/img/logo.svg',
             'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',

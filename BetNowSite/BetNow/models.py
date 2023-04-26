@@ -4,15 +4,15 @@ from django.contrib.auth.hashers import check_password as django_check_password
 from django.utils.translation import gettext_lazy as _
 
 
-class PerfilManager(BaseUserManager):
+class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('El email es requerido')
         
-        perfil = self.model(email=self.normalize_email(email), **extra_fields)
-        perfil.set_password(password)
-        perfil.save()
-        return perfil
+        user = self.model(email=self.normalize_email(email), **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
 
     def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
@@ -20,7 +20,7 @@ class PerfilManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-class Perfil(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     nombres = models.CharField(max_length=100)
     apellidos = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
@@ -37,7 +37,7 @@ class Perfil(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     last_login = models.DateTimeField(null=True, blank=True)
 
-    objects = PerfilManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nombres', 'apellidos']
@@ -45,7 +45,7 @@ class Perfil(AbstractBaseUser, PermissionsMixin):
     groups = models.ManyToManyField(
         Group,
         blank=True,
-        related_name='perfiles', # Add this line
+        related_name='usuarios', # Add this line
         verbose_name=_('groups'),
         help_text=_(
             'The groups this user belongs to. A user will get all permissions '
@@ -55,7 +55,7 @@ class Perfil(AbstractBaseUser, PermissionsMixin):
     user_permissions = models.ManyToManyField(
         Permission,
         blank=True,
-        related_name='perfiles', # Add this line
+        related_name='usuarios', # Add this line
         verbose_name=_('user permissions'),
         help_text=_('Specific permissions for this user.'),
     )
