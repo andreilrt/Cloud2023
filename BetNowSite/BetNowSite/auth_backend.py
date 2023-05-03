@@ -4,12 +4,12 @@ from BetNow.models import User
 class UserAuthBackend(BaseBackend):
     def authenticate(self, request, email=None, password=None, **kwargs):
         try:
-            User = User.objects.get(email=email)
+            user = User.objects.get(email=email)
         except User.DoesNotExist:
             return None
 
-        if User.password == password:
-            return User
+        if user.password == password:
+            return user
         else:
             return None
 

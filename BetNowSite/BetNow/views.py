@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
 from .models import User
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -59,7 +59,7 @@ def Registro(request):
         fecha_expedicion = request.POST['issue-date']
 
         # Create a new user object with the extracted values
-        user = user.objects.create(nombres=nombres, apellidos=apellidos, password=password, pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
+        user = User.objects.create(nombres=nombres, apellidos=apellidos, password=password, pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
         user.save()
         context = {
             'logo': '/static/BetNow/img/logo.svg',
