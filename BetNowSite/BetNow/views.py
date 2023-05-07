@@ -2,8 +2,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
-from .models import User
-#from django.contrib.auth.models import User
+from .models import Perfil
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -13,10 +13,9 @@ def index(request):
         email = request.POST['email']
         password = request.POST['password']
 
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=email, password=password)
         if user is not None:
             login(request, user)
-            user.backend = 'BetNow.backends.userAuthBackend'
             return redirect('inicio')
         else:
             error_message = "Email o contraseña invalidos, por favor intente de nuevo."
@@ -59,8 +58,10 @@ def Registro(request):
         fecha_expedicion = request.POST['issue-date']
 
         # Create a new user object with the extracted values
-        user = User.objects.create(nombres=nombres, apellidos=apellidos, password=password, pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
+        user = User.objects.create_user(username=email, password=password, first_name=nombres, last_name=apellidos, email=email)
+        new_user = Perfil.objects.create(pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
         user.save()
+        new_user.save()
         context = {
             'logo': '/static/BetNow/img/logo.svg',
             'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
@@ -70,7 +71,22 @@ def Registro(request):
             'Tennis': '/static/BetNow/img/Tennis.svg',
             'Avatar': '/static/BetNow/img/Avatar.svg'
         }
-        return redirect("inicio")
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('inicio')
+        else:
+            error_message = "Email o contraseña invalidos, por favor intente de nuevo."
+            context = {
+                'error_message': error_message,
+                'logo': '/static/BetNow/img/logo.svg',
+                'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+                'Basketball': '/static/BetNow/img/Basketball.svg',
+                'Fondo': '/static/BetNow/img/Basketball.svg',
+                'Futbol': '/static/BetNow/img/Futbol.svg',
+                'Tennis': '/static/BetNow/img/Tennis.svg',
+            }
+            return render(request, 'BetNow/index.html', context)
     else:
         context = {
             'logo': '/static/BetNow/img/logo.svg',
@@ -89,6 +105,7 @@ def index_usuario(request):
         'Avatar': '/static/BetNow/img/Avatar.svg'
     }
     return render(request, "BetNow/usuario_inicio.html", context)
+
 
 def logout_view(request):
     logout(request)
