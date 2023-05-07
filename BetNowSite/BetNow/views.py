@@ -57,13 +57,6 @@ def Registro(request):
         numero_documento = request.POST['document-number']
         fecha_expedicion = request.POST['issue-date']
 
-        #Adicional, información de pago
-        tipo_de_metodo = request.POST.get('payment-method')
-        print(tipo_de_metodo)
-
-        banco = request.POST.get('colombian-banks')
-        print(banco)
-
         # Create a new user object with the extracted values
         user = User.objects.create_user(username=email, password=password, first_name=nombres, last_name=apellidos, email=email)
         new_user = Perfil.objects.create(pais=pais, ciudad=ciudad, direccion=direccion, email=email, indicativo=indicativo, celular=celular, documento=documento, numero_documento=numero_documento, fecha_expedicion=fecha_expedicion)
