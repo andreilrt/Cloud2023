@@ -106,6 +106,19 @@ def index_usuario(request):
     }
     return render(request, "BetNow/usuario_inicio.html", context)
 
+@login_required
+def consultas_usuario(request, first_name):
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'first_name': first_name
+    }
+    return render(request, "BetNow/consultas_usuario.html", context)
 
 def logout_view(request):
     logout(request)

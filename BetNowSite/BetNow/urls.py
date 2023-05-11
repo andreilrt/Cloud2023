@@ -8,5 +8,6 @@ urlpatterns = [
     path("", LoginView.as_view(), name='index'),
     path("Registro", views.Registro, name="Registro"),
     path("inicio", views.index_usuario, name="inicio"),
-    path("logout", views.logout_view, name="logout")
+    path("logout", views.logout_view, name="logout"),
+    path('consultas_usuario/<str:first_name>', views.consultas_usuario, name='consultas_usuario')
 ]
