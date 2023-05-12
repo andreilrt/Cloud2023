@@ -36,31 +36,28 @@
 {% block body %}
 <body>
     <div class="v1_2">
-        <span class="v5_7">Dinero Actual</span><span class="v5_10">Cantidad $</span><span class="v5_12">Historial
-            de Transacciones</span>
-        <div class="v16_7">
-            <div class="v5_13"></div><span class="v5_14">Realizar Retiro</span>
+        <div class="column">
+            <div class="title">Dinero Actual</div>
+            <div class="atm">
+                <img src="{{ ATM }}" alt="ATM" class="atm-image">
+            </div>
         </div>
-        <div class="v16_12">
-            <div class="v5_23"></div><span class="v5_24">Apuestas Ganadoras</span>
+        <div class="column">
+            <div class="title">Cantidad $</div>
+            <button class="retiro">Realizar Retiro</button>
+            <button class="salir">Salir</button> 
         </div>
-        <div class="v16_13">
-            <div class="v5_25"></div><span class="v5_26">Apuestas Perdedoras</span>
+        <div class="column">
+            <div class="title">Historial de Transacciones</div>
+            <div class="buttons">
+                <button class="deposito">Depósito</button>
+                <button class="retiros">Retiros</button>
+                <button class="detalles">Detalles de Apuestas</button>
+                <button class="ganadoras">Apuestas Ganadoras</button>
+                <button class="perdedoras">Apuestas Perdedoras</button>
+            </div>
         </div>
-        <div class="v16_10">
-            <div class="v5_21"></div><span class="v5_22">Retiros</span>
-        </div>
-        <div class="v16_11">
-            <div class="v5_19"></div><span class="v5_20">Detalles Apuesta</span>
-        </div>
-        <div class="v16_9">
-            <div class="v5_17"></div><span class="v5_18">Deposito</span>
-        </div>
-        <div class="v16_8">
-            <div class="v5_15"></div><span class="v5_16">Salir</span>
-        </div>
-        <div class="v19_65"></div>
-        <div class="v23_826"></div>
-    </div>
+    </div>   
+        
 </body>
 {% endblock %}

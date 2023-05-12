@@ -116,6 +116,7 @@ def consultas_usuario(request, first_name):
         'Futbol': '/static/BetNow/img/Futbol.svg',
         'Tennis': '/static/BetNow/img/Tennis.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
+        'ATM': '/static/BetNow/img/atm.svg',
         'first_name': first_name
     }
     return render(request, "BetNow/consultas_usuario.html", context)
