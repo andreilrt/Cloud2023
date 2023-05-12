@@ -45,7 +45,7 @@
         <div class="column">
             <div class="title">Cantidad $</div>
             <button class="retiro">Realizar Retiro</button>
-            <button class="salir">Salir</button> 
+            <button type="button" class="btn salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
         </div>
         <div class="column">
             <div class="title">Historial de Transacciones</div>
@@ -60,4 +60,5 @@
     </div>   
         
 </body>
+<script src="{% static 'BetNow/js/consultas_usuario.js' %}"></script>
 {% endblock %}
