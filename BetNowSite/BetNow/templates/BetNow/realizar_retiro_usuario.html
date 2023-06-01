@@ -37,21 +37,21 @@
 <body>
     <div class="v1_2">
         <div class="column">
-            <div class="title">Dinero Actual</div>
+            <div class="title">Realizar retiro</div>
             <div class="atm">
                 <img src="{{ ATM }}" alt="ATM" class="atm-image">
             </div>
         </div>
         <div class="column">
             <div class="title">Cantidad $</div>
-            <button class="retiro">Dinero Actual</button>
+            <button class="retiro">Realizar Retiro</button>
             <button type="button" class="btn salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
         </div>
         <div class="column">
             <div class="title">Historial de Transacciones</div>
             <div class="buttons">
                 <button class="deposito">Depósito</button>
-                <button type="button" class="retiro_btn" id="retiro_btn" data-url="{% url 'realizar_retiro_usuario' request.user.first_name %}" class="retiros">Retiro</button>
+                <button class="retiros">Retiros</button>
                 <button class="detalles">Detalles de Apuestas</button>
                 <button class="ganadoras">Apuestas Ganadoras</button>
                 <button class="perdedoras">Apuestas Perdedoras</button>

@@ -121,6 +121,21 @@ def consultas_usuario(request, first_name):
     }
     return render(request, "BetNow/consultas_usuario.html", context)
 
+@login_required
+def realizar_retiro_usuario(request, first_name):
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'ATM': '/static/BetNow/img/atm.svg',
+        'first_name': first_name
+    }
+    return render(request, "BetNow/realizar_retiro_usuario.html", context)
+
 def logout_view(request):
     logout(request)
     return redirect('index')
