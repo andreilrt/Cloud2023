@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^61r((_586g!2hokx5lu45e0=aut&jpjx6n6gj^2#tr&xo7_hh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'BetNowDB',
-        'USER': 'Admin',
+        'USER': 'postgres',
         'PASSWORD': 'Nube2023',
         'HOST': 'localhost',
         'PORT': '5432',
