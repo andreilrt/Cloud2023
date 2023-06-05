@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block head %}
     <link rel="stylesheet" href="{% static 'BetNow/css/style.css' %}">
+    {% endblock %}
     <title>Bet Now</title>
     <link rel = "icon" href="{{ logo }}" type ="img/icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

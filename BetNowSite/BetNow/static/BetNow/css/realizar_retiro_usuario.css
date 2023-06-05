@@ -344,44 +344,42 @@ footer {
 
 .v1_2 {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 .column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
 }
-  
-  .title {
+
+.form-container {
+    padding: 20px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.title {
     font-weight: bold;
     margin-bottom: 10px;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 5px 10px;
-  }
-  
-  .atm {
+}
+
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.retiro,
+.salir {
+    width: 100%;
     margin-top: 20px;
-    text-align: center;
-  }
-  
-  .atm-image {
-    width: 400px;
-    height: auto;
-  }
-  
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 30px;
-  }
-  
-  .buttons button {
-    width: 200px;
-    margin-bottom: 10px;
     background-color: #ffa200;
     color: #333;
     border: 1px solid #fff;
@@ -390,59 +388,13 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s;
     font-weight: bold;
-  }
-  
-  .buttons button:hover {
-    background-color: #d18616;
-  }
-  
-  .buttons .ganadoras {
-    background-color: rgb(17, 255, 17);
-  }
+}
 
-  .buttons .ganadoras:hover{
-    background-color: rgb(39, 162, 39);
-  }
-  
-  .buttons .perdedoras {
+.salir {
     background-color: red;
-  }
+}
 
-  .buttons .perdedoras:hover {
-    background-color: rgb(156, 22, 22);
-  }
-  
-  .retiro {
-    width: 200px;
-    margin-top: 30px;
-    background-color: #ffa200;
-    color: #333;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    padding: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: bold;
-  }
-  
-  .retiro:hover {
-    background-color: #d18616;
-  }
-  
-  .salir {
-    width: 200px;
-    margin-top: 30px;
-    align-self: flex-end;
-    background-color: red;
-    color: #333;
-    border: 1px solid #fff;
-    border-radius: 5px;
-    padding: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-weight: bold;
-  }
-  
-  .salir:hover {
-    background-color: #b71c1c;
-  }
+.retiro:hover,
+.salir:hover {
+    background-color: #f55212;
+}

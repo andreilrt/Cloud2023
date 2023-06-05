@@ -1,6 +1,8 @@
 {% extends "BetNow/layout.html" %}
 {% load static %}
-
+{% block head %}
+    <link rel="stylesheet" href="{% static 'BetNow/css/realizar_retiro_usuario.css' %}">
+{% endblock %}
 {% block header %}
     <header>
         <div class="logo">
@@ -37,28 +39,28 @@
 <body>
     <div class="v1_2">
         <div class="column">
-            <div class="title">Realizar retiro</div>
             <div class="atm">
                 <img src="{{ ATM }}" alt="ATM" class="atm-image">
             </div>
         </div>
         <div class="column">
-            <div class="title">Cantidad $</div>
-            <button class="retiro">Realizar Retiro</button>
-            <button type="button" class="btn salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
-        </div>
-        <div class="column">
-            <div class="title">Historial de Transacciones</div>
-            <div class="buttons">
-                <button class="deposito">Depósito</button>
-                <button class="retiros">Retiros</button>
-                <button class="detalles">Detalles de Apuestas</button>
-                <button class="ganadoras">Apuestas Ganadoras</button>
-                <button class="perdedoras">Apuestas Perdedoras</button>
+            <div class="form-container">
+                <div class="title">Saldo $$$</div>
+                <input type="number" placeholder="Cantidad a retirar" name="cantidad" required>
+                <select id="colombian-banks" name="colombian-banks" required>
+                    <option value="" disabled selected hidden>Seleccionar un banco</option>
+                    {% include 'BetNow/bankslist.html' %}
+                </select>
+                <select id="account-type" name="account-type" required>
+                    <option value="" disabled selected hidden>Seleccionar el tipo de cuenta</option>
+                    <option value="savings">Ahorros</option>
+                    <option value="current">Corriente</option>
+                </select>
+                <button type="submit" class="retiro">Realizar Retiro</button>
+                <button type="button" class="salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
             </div>
         </div>
-    </div>   
-        
+    </div>
 </body>
 <script src="{% static 'BetNow/js/consultas_usuario.js' %}"></script>
 {% endblock %}
