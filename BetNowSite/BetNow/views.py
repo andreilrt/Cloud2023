@@ -191,34 +191,6 @@ def realizar_retiro_usuario(request):
     return render(request, "BetNow/realizar_retiro_usuario.html", context)
 
 @login_required
-def realizar_retiro(request):
-    if request.method == 'POST':
-        cantidad = Decimal(request.POST.get('cantidad'))  # Convertir a Decimal
-        metodo_transaccion = request.POST.get('metodo-transaccion')
-
-        perfil = request.user.perfil
-        if cantidad <= perfil.saldo:
-            # Restar la cantidad del saldo
-            perfil.saldo -= cantidad
-            perfil.save()
-
-            # Realizar las operaciones correspondientes según el método de transacción seleccionado
-            if metodo_transaccion.startswith('bank-'):
-                # Realizar operaciones para método de banco
-                # ...
-                return redirect('realizar_retiro_usuario')
-            elif metodo_transaccion.startswith('pse-'):
-                # Realizar operaciones para método PSE
-                # ...
-                return redirect('realizar_retiro_usuario')
-
-        else:
-            # Mostrar mensaje de advertencia si la cantidad a retirar es mayor al saldo disponible
-            messages.warning(request, 'La cantidad a retirar es mayor al saldo disponible.')
-
-    return redirect('realizar_retiro_usuario')
-
-@login_required
 def edit_data_user(request):
     context = {
         'logo': '/static/BetNow/img/logo.svg',
@@ -363,7 +335,37 @@ def retiro(request):
         'retiros': retiros,
     }
     return render(request, "BetNow/deposito.html", context)
+    
+@login_required
+def realizar_retiro(request):
+    if request.method == 'POST':
+        cantidad = Decimal(request.POST.get('cantidad'))  # Convertir a Decimal
+        metodo_transaccion = request.POST.get('metodo-transaccion')
 
+        perfil = request.user.perfil
+
+        if cantidad <= perfil.saldo:
+            # Restar la cantidad del saldo
+            perfil.saldo -= cantidad
+            perfil.save()
+            Retiro = Retiro.objects.create(perfil=perfil, cantidad=cantidad)
+            Retiro.save()
+
+            # Realizar las operaciones correspondientes según el método de transacción seleccionado
+            if metodo_transaccion.startswith('bank-'):
+                # Realizar operaciones para método de banco
+                # ...
+                return redirect('realizar_retiro_usuario')
+            elif metodo_transaccion.startswith('pse-'):
+                # Realizar operaciones para método PSE
+                # ...
+                return redirect('realizar_retiro_usuario')
+
+        else:
+            # Mostrar mensaje de advertencia si la cantidad a retirar es mayor al saldo disponible
+            messages.warning(request, 'La cantidad a retirar es mayor al saldo disponible.')
+
+    return redirect('realizar_retiro_usuario')
 
 def logout_view(request):
     logout(request)
