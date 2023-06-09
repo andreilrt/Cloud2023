@@ -334,7 +334,7 @@ def retiro(request):
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'Retiros': retiros,
     }
-    return render(request, "BetNow/deposito.html", context)
+    return render(request, "BetNow/retiro.html", context)
     
 @login_required
 def realizar_retiro(request):
