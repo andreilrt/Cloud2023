@@ -67,4 +67,4 @@ class Retiro(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Deposito: {self.cantidad} - {self.fecha}'
+        return f'Retiro: {self.cantidad} - {self.fecha}'

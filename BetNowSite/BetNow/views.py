@@ -360,7 +360,7 @@ def retiro(request):
         'Futbol': '/static/BetNow/img/Futbol.svg',
         'Tennis': '/static/BetNow/img/Tennis.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
-        'depositos': retiros,
+        'retiros': retiros,
     }
     return render(request, "BetNow/deposito.html", context)
 
