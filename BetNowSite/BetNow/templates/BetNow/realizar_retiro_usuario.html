@@ -25,28 +25,40 @@
                 </ul>
                 {% endif %}
                 <div class="title">Saldo actual: {{ user.perfil.saldo }}</div>
-                <form action="{% url 'realizar_retiro' %}" method="POST">
-                    {% csrf_token %}
-                    <input type="number" placeholder="Cantidad a retirar" name="cantidad" required>
-                    <select id="metodo-transaccion" name="metodo-transaccion" required>
-                        <option value="" disabled selected hidden>Seleccionar un método de transacción</option>
-                        {% if user.perfil.banco_set.exists %}
-                            <optgroup label="Banco">
-                                {% for banco in user.perfil.banco_set.all %}
-                                    <option value="bank-{{ banco.id }}">{{ banco.nombre_banco }}</option>
-                                {% endfor %}
-                            </optgroup>
-                        {% endif %}
-                        {% if user.perfil.pse_set.exists %}
-                            <optgroup label="PSE">
-                                {% for pse in user.perfil.pse_set.all %}
-                                    <option value="pse-{{ pse.id }}">{{ pse.banco }}</option>
-                                {% endfor %}
-                            </optgroup>
-                        {% endif %}
-                    </select>                                    
-                    <button type="submit" class="retiro">Realizar Retiro</button>
-                </form>
+                {% if user.perfil.banco_set.exists or user.perfil.tarjeta_set.exists or user.perfil.pse_set.exists %}
+                    <form action="{% url 'realizar_retiro' %}" method="POST">
+                        {% csrf_token %}
+                        <input type="number" placeholder="Cantidad a agregar" name="cantidad" required>
+                        <select id="metodo-transaccion" name="metodo-transaccion" required>
+                            <option value="" disabled selected hidden>Seleccionar un método de transacción</option>
+                            {% if user.perfil.banco_set.exists %}
+                                <optgroup label="Banco">
+                                    {% for banco in user.perfil.banco_set.all %}
+                                        <option value="bank-{{ banco.id }}">{{ banco.nombre_banco }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            {% endif %}
+                            {% if user.perfil.tarjeta_set.exists %}
+                                <optgroup label="Tarjeta">
+                                    {% for tarjeta in user.perfil.tarjeta_set.all %}
+                                        <option value="tarjeta-{{ tarjeta.id }}">{{ tarjeta.nombre_titular }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            {% endif %}
+                            {% if user.perfil.pse_set.exists %}
+                                <optgroup label="PSE">
+                                    {% for pse in user.perfil.pse_set.all %}
+                                        <option value="pse-{{ pse.id }}">{{ pse.banco }}</option>
+                                    {% endfor %}
+                                </optgroup>
+                            {% endif %}
+                        </select>
+                        <button type="submit" class="agregar">Agregar Dinero</button>
+                    </form>
+                {% else %}
+                    <p>No tienes métodos de transacción registrados. Por favor, registra un método de transacción (banco, tarjeta o PSE) para poder agregar dinero a tu cuenta.</p>
+                    <a href="{% url 'registrar_metodo_transaccion' %}" class="registrar-metodo">Registrar Método de Transacción</a>
+                {% endif %}
                 <button type="button" class="salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
             </div>
         </div>
