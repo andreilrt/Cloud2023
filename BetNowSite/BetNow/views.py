@@ -290,7 +290,7 @@ def registrar_metodo_transaccion(request):
             tipo_cuenta = request.POST['account-type']
             banco = Banco.objects.create(perfil=perfil, nombre_titular=titular, numero_cuenta=numero_cuenta, tipo_cuenta=tipo_cuenta, nombre_banco=banco_nombre)
             banco.save()
-            return redirect('agregar_dinero')
+            return redirect('inicio')
 
     elif payment_method == 'pse':
         if 'pse-bank' in request.POST:
@@ -304,7 +304,7 @@ def registrar_metodo_transaccion(request):
             correo_electronico = request.POST['pse-email']
             pse = PSE.objects.create(perfil=perfil, banco=banco, tipo_cuenta=tipo_cuenta, tipo_documento=tipo_documento, numero_documento=numero_documento, nombre=nombre, apellido=apellido, correo_electronico=correo_electronico)
             pse.save()
-            return redirect('agregar_dinero')
+            return redirect('inicio')
 
     elif payment_method == 'card':
         if 'cardholder-name' in request.POST:
@@ -315,7 +315,7 @@ def registrar_metodo_transaccion(request):
             cvv = request.POST['cvv']
             tarjeta = Tarjeta.objects.create(perfil=perfil, nombre_titular=nombre_titular, numero_tarjeta=numero_tarjeta, fecha_expiracion=fecha_expiracion, cvv=cvv)
             tarjeta.save()
-            return redirect('agregar_dinero')
+            return redirect('inicio')
 
 
     context = {
