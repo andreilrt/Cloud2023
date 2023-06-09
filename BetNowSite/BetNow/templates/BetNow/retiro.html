@@ -1,0 +1,33 @@
+{% extends "BetNow/usuario_inicio.html" %}
+{% load static %}
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'BetNow/css/deposito.css' %}">
+{% endblock %}
+{% block titulo %}
+    <h1 class="titulo">Historial de Retiros</h1>
+{% endblock %}
+
+{% block body %}
+    <div class="historial-depositos">
+        <table>
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for retiro in Retiros %}
+                <tr>
+                    <td>{{ retiro.fecha }}</td>
+                    <td>{{ retiro.cantidad }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% block scripts %}
+        {{ block.super }}
+    {% endblock %}
+{% endblock %}

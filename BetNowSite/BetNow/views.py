@@ -349,6 +349,21 @@ def deposito(request):
     }
     return render(request, "BetNow/deposito.html", context)
 
+@login_required
+def retiro(request):
+    retiros = Retiro.objects.filter(perfil=request.user.perfil)
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'depositos': retiros,
+    }
+    return render(request, "BetNow/deposito.html", context)
+
 
 def logout_view(request):
     logout(request)
