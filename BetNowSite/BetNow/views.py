@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import BancoForm, PSEForm, TarjetaForm
-from .models import Perfil, Banco, PSE, Tarjeta, Deposito
+from .models import Perfil, Banco, PSE, Tarjeta, Deposito, Retiro
 from django.contrib.auth.models import User
 from decimal import Decimal
 
