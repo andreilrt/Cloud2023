@@ -273,36 +273,50 @@ def realizar_agregar_dinero(request):
 
 @login_required
 def registrar_metodo_transaccion(request):
-    payment_method = None  # Valor predeterminado
+    banks_form = BancoForm()
+    pse_form = PSEForm()
+    card_form = TarjetaForm()
+    payment_method = None
 
-    if request.method == 'POST':
-        payment_method = request.POST.get('payment-method')
+     # Check the selected payment method and save the corresponding information
+    payment_method = request.POST.get('payment-method')
+    perfil = request.user.perfil
+    if payment_method == 'banks':
+        if 'colombian-banks' in request.POST:
+            # Process bank information
+            banco_nombre = request.POST['colombian-banks']
+            titular = request.POST['account-name']
+            numero_cuenta = request.POST['account-number']
+            tipo_cuenta = request.POST['account-type']
+            banco = Banco.objects.create(perfil=perfil, nombre_titular=titular, numero_cuenta=numero_cuenta, tipo_cuenta=tipo_cuenta, nombre_banco=banco_nombre)
+            banco.save()
+            return redirect('agregar_dinero')
 
-        if payment_method == 'banks':
-            banks_form = BancoForm(request.POST)
-            if banks_form.is_valid():
-                banks_form.save()
-                # Redireccionar a la página de éxito o a donde desees
-                return redirect('agregar_dinero')
+    elif payment_method == 'pse':
+        if 'pse-bank' in request.POST:
+            # Process PSE information
+            banco = request.POST['pse-bank']
+            tipo_cuenta = request.POST['pse-account-type']
+            tipo_documento = request.POST['pse-document-type']
+            numero_documento = request.POST['pse-document-number']
+            nombre = request.POST['pse-first-name']
+            apellido = request.POST['pse-last-name']
+            correo_electronico = request.POST['pse-email']
+            pse = PSE.objects.create(perfil=perfil, banco=banco, tipo_cuenta=tipo_cuenta, tipo_documento=tipo_documento, numero_documento=numero_documento, nombre=nombre, apellido=apellido, correo_electronico=correo_electronico)
+            pse.save()
+            return redirect('agregar_dinero')
 
-        elif payment_method == 'pse':
-            pse_form = PSEForm(request.POST)
-            if pse_form.is_valid():
-                pse_form.save()
-                # Redireccionar a la página de éxito o a donde desees
-                return redirect('agregar_dinero')
+    elif payment_method == 'card':
+        if 'cardholder-name' in request.POST:
+            # Process card information
+            nombre_titular = request.POST['cardholder-name']
+            numero_tarjeta = request.POST['card-number']
+            fecha_expiracion = request.POST['month'] + '/' + request.POST['year']
+            cvv = request.POST['cvv']
+            tarjeta = Tarjeta.objects.create(perfil=perfil, nombre_titular=nombre_titular, numero_tarjeta=numero_tarjeta, fecha_expiracion=fecha_expiracion, cvv=cvv)
+            tarjeta.save()
+            return redirect('agregar_dinero')
 
-        elif payment_method == 'card':
-            card_form = TarjetaForm(request.POST)
-            if card_form.is_valid():
-                card_form.save()
-                # Redireccionar a la página de éxito o a donde desees
-                return redirect('agregar_dinero')
-
-    else:
-        banks_form = BancoForm()
-        pse_form = PSEForm()
-        card_form = TarjetaForm()
 
     context = {
         'logo': '/static/BetNow/img/logo.svg',
@@ -313,13 +327,11 @@ def registrar_metodo_transaccion(request):
         'Tennis': '/static/BetNow/img/Tennis.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'banks_form': banks_form,
-        'pse_form': pse_form if payment_method == 'pse' else PSEForm(),
-        'card_form': card_form if payment_method == 'card' else TarjetaForm()
+        'pse_form': pse_form,
+        'card_form': card_form
     }
 
     return render(request, 'BetNow/registrar_metodo_transaccion.html', context)
-
-
 
 
 @login_required
