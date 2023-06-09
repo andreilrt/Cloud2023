@@ -18,4 +18,5 @@ urlpatterns = [
     path('realizar_retiro', views.realizar_retiro, name='realizar_retiro'),
     path('deposito', views.deposito, name='deposito'),
     path('retiro', views.retiro, name='retiro'),
+    path('ligas', views.Ligas, name='ligas'),
 ]

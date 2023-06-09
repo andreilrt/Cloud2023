@@ -383,7 +383,7 @@ def Ligas(request):
         'Bal': '/static/BetNow/img/Bal.svg',
         'Ten': '/static/BetNow/img/Ten.svg',
     }
-    return render(request, "BetNow/retiro.html", context)
+    return render(request, "BetNow/ligas.html", context)
 
 def logout_view(request):
     logout(request)
