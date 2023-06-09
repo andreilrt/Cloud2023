@@ -347,10 +347,6 @@ def realizar_retiro(request):
         user = request.user
         perfil = user.perfil
 
-        # Actualizar el saldo del usuario
-        perfil.saldo -= cantidad
-        perfil.save()
-
         if cantidad <= perfil.saldo:
             # Restar la cantidad del saldo
             perfil.saldo -= cantidad
