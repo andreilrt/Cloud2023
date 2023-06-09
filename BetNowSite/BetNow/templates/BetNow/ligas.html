@@ -1,0 +1,35 @@
+{% extends "BetNow/usuario_inicio.html" %}
+{% load static %}
+{% block stylesheets %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'BetNow/css/ligas.css' %}">
+{% endblock %}
+{% block titulo %}
+    <h1 class="titulo">Consultas</h1>
+{% endblock %}
+
+{% block body %}
+<body>
+    <div class="v1_2">
+        <div class="column">
+            <div class="Liga">
+                <img src="{{ Fut }}" alt="Futbol">
+            </div>
+        </div>
+        <div class="column">
+            <div class="Liga">
+                <img src="{{ Bal }}" alt="Baloncesto">
+            </div>
+        </div>
+        <div class="column">
+            <div class="Liga">
+                <img src="{{ Ten }}" alt="Tenis">
+            </div>
+        </div>
+    </div>
+    {% block scripts %}
+        {{ block.super }}
+    {% endblock %}
+</body>
+{% endblock %}
+

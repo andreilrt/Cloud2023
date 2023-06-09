@@ -370,6 +370,21 @@ def realizar_retiro(request):
 
     return redirect('realizar_retiro_usuario')
 
+def Ligas(request):
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'Fut': '/static/BetNow/img/Fut.svg',
+        'Bal': '/static/BetNow/img/Bal.svg',
+        'Ten': '/static/BetNow/img/Ten.svg',
+    }
+    return render(request, "BetNow/retiro.html", context)
+
 def logout_view(request):
     logout(request)
     return redirect('index')
