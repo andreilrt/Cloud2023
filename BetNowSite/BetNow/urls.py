@@ -9,6 +9,12 @@ urlpatterns = [
     path("Registro", views.Registro, name="Registro"),
     path("inicio", views.index_usuario, name="inicio"),
     path("logout", views.logout_view, name="logout"),
-    path('consultas_usuario/<str:first_name>', views.consultas_usuario, name='consultas_usuario'),
-    path('realizar_retiro_usuario/<str:first_name>', views.realizar_retiro_usuario, name='realizar_retiro_usuario')
+    path('consultas_usuario', views.consultas_usuario, name='consultas_usuario'),
+    path('realizar_retiro_usuario', views.realizar_retiro_usuario, name='realizar_retiro_usuario'),
+    path('edit_data_user', views.edit_data_user, name='edit_data_user'),
+    path('agregar_dinero', views.agregar_dinero, name='agregar_dinero'),
+    path('registrar_metodo_transaccion', views.registrar_metodo_transaccion, name='registrar_metodo_transaccion'),
+    path('realizar_agregar_dinero', views.realizar_agregar_dinero, name='realizar_agregar_dinero'),
+    path('realizar_retiro', views.realizar_retiro, name='realizar_retiro'),
+    path('deposito', views.deposito, name='deposito'),
 ]

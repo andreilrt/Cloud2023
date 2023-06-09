@@ -1,0 +1,62 @@
+.v1_2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    justify-items: center;
+    height: 100vh;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-container {
+    padding: 20px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.saldo {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+select,
+input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.agregar,
+.salir {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #ffa200;
+    color: #333;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.salir {
+    background-color: red;
+}
+
+.agregar:hover,
+.salir:hover {
+    background-color: #f55212;
+}

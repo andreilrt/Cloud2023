@@ -1,34 +1,7 @@
-{% extends "BetNow/layout.html" %}
+{% extends "BetNow/usuario_inicio.html" %}
 {% load static %}
-
-{% block header %}
-    <header>
-        <div class="logo">
-            <img src="{{ logo }}" alt="Logo" class="logo">
-        </div>
-        <div class="welcome">
-            <h3>Hola, {{ user.nombres }}</h3>
-        </div>
-        <div>
-            <img src="{{ Avatar }}" alt="User avatar" class="user-avatar" id="user-avatar">
-            <ul class="dropdown-opciones-usuario">
-                <li><a href="#">Editar datos</a></li>
-                <li><a href="#">Consultas</a></li>
-                <li><a href="#">Agregar dinero a cuenta</a></li>
-                <li><a href="#">Retirar dinero</a></li>
-                <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-            </ul>
-        </div>
-    </header>
-    <script src="{% static 'BetNow/js/opciones_usuario.js' %}"></script>
-{% endblock %}
-{% block nav %}
-    <nav>
-        <a href="{% url 'inicio' %}" class="nav_button"><strong>Inicio</strong></a>
-        <a href="#" class="nav_button"><strong>Consultar Apuestas</strong></a>
-        <a href="#" class="nav_button"><strong>Consultar Mis Apuestas</strong></a>
-        <a href="#" class="nav_button"><strong>Ligas</strong></a>
-    </nav>
+{% block titulo %}
+    <h1 class="titulo">Editar datos</h1>
 {% endblock %}
 {% block body %}
 <main>
@@ -529,5 +502,8 @@
         </div>
         <button type="submit">Guardar cambios</button>
     </form>
+    {% block scripts %}
+        {{ block.super }}
+    {% endblock %}
 </main>
 {% endblock %}

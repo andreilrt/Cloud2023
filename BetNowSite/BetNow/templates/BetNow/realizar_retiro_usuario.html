@@ -1,39 +1,10 @@
-{% extends "BetNow/layout.html" %}
+{% extends "BetNow/usuario_inicio.html" %}
 {% load static %}
 {% block stylesheets %}
   <link rel="stylesheet" href="{% static 'BetNow/css/realizar_retiro_usuario.css' %}">
 {% endblock %}
-{% block header %}
-    <header>
-        <div class="logo">
-            <img src="{{ logo }}" alt="Logo" class="logo">
-        </div>
-        <div class="Titulo_usuario">
-            <h2>Realizar Retiro</h3>
-        </div>
-        <div class="welcome">
-            <h3>Hola, {{ user.first_name }}</h3>
-        </div>
-        <div>
-            <img src="{{ Avatar }}" alt="User avatar" class="user-avatar" id="user-avatar">
-            <ul class="dropdown-opciones-usuario">
-                <li><a href="#">Editar datos</a></li>
-                <li><a href="{% url 'consultas_usuario' request.user.first_name %}">Consultas</a></li>
-                <li><a href="#">Agregar dinero a cuenta</a></li>
-                <li><a href="#">Retirar dinero</a></li>
-                <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
-            </ul>
-        </div>
-    </header>
-    <script src="{% static 'BetNow/js/opciones_usuario.js' %}"></script>
-{% endblock %}
-{% block nav %}
-    <nav>
-        <a href="{% url 'inicio' %}" class="nav_button"><strong>Inicio</strong></a>
-        <a href="#" class="nav_button"><strong>Consultar Apuestas</strong></a>
-        <a href="#" class="nav_button"><strong>Consultar Mis Apuestas</strong></a>
-        <a href="#" class="nav_button"><strong>Ligas</strong></a>
-    </nav>
+{% block titulo %}
+    <h1 class="titulo">Realizar retiro</h1>
 {% endblock %}
 {% block body %}
 <body>
@@ -45,22 +16,42 @@
         </div>
         <div class="column">
             <div class="form-container">
-                <div class="title">Saldo $$$</div>
-                <input type="number" placeholder="Cantidad a retirar" name="cantidad" required>
-                <select id="colombian-banks" name="colombian-banks" required>
-                    <option value="" disabled selected hidden>Seleccionar un banco</option>
-                    {% include 'BetNow/bankslist.html' %}
-                </select>
-                <select id="account-type" name="account-type" required>
-                    <option value="" disabled selected hidden>Seleccionar el tipo de cuenta</option>
-                    <option value="savings">Ahorros</option>
-                    <option value="current">Corriente</option>
-                </select>
-                <button type="submit" class="retiro">Realizar Retiro</button>
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="title">Saldo actual: {{ user.perfil.saldo }}</div>
+                <form action="{% url 'realizar_retiro' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="number" placeholder="Cantidad a retirar" name="cantidad" required>
+                    <select id="metodo-transaccion" name="metodo-transaccion" required>
+                        <option value="" disabled selected hidden>Seleccionar un método de transacción</option>
+                        {% if user.perfil.banco_set.exists %}
+                            <optgroup label="Banco">
+                                {% for banco in user.perfil.banco_set.all %}
+                                    <option value="bank-{{ banco.id }}">{{ banco.nombre_banco }}</option>
+                                {% endfor %}
+                            </optgroup>
+                        {% endif %}
+                        {% if user.perfil.pse_set.exists %}
+                            <optgroup label="PSE">
+                                {% for pse in user.perfil.pse_set.all %}
+                                    <option value="pse-{{ pse.id }}">{{ pse.banco }}</option>
+                                {% endfor %}
+                            </optgroup>
+                        {% endif %}
+                    </select>                                    
+                    <button type="submit" class="retiro">Realizar Retiro</button>
+                </form>
                 <button type="button" class="salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
             </div>
         </div>
     </div>
+    {% block scripts %}
+        {{ block.super }}
+    {% endblock %}
 </body>
-<script src="{% static 'BetNow/js/consultas_usuario.js' %}"></script>
 {% endblock %}

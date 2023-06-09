@@ -1,9 +1,13 @@
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.shortcuts import render, redirect
-from .models import Perfil, Banco, PSE, Tarjeta
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import BancoForm, PSEForm, TarjetaForm
+from .models import Perfil, Banco, PSE, Tarjeta, Deposito
 from django.contrib.auth.models import User
+from decimal import Decimal
+
 
 # Create your views here.
 
@@ -149,7 +153,7 @@ def index_usuario(request):
     return render(request, "BetNow/usuario_inicio.html", context)
 
 @login_required
-def consultas_usuario(request, first_name):
+def consultas_usuario(request):
     context = {
         'logo': '/static/BetNow/img/logo.svg',
         'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
@@ -159,12 +163,18 @@ def consultas_usuario(request, first_name):
         'Tennis': '/static/BetNow/img/Tennis.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'ATM': '/static/BetNow/img/atm.svg',
-        'first_name': first_name
+        'saldo': request.user.perfil.saldo,  # Agrega el saldo actual del usuario al contexto
     }
     return render(request, "BetNow/consultas_usuario.html", context)
 
+
 @login_required
-def realizar_retiro_usuario(request, first_name):
+def realizar_retiro_usuario(request):
+    perfil = Perfil.objects.get(user=request.user)
+    bancos = perfil.banco_set.all()
+    tarjetas = perfil.tarjeta_set.all()
+    pses = perfil.pse_set.all()
+
     context = {
         'logo': '/static/BetNow/img/logo.svg',
         'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
@@ -174,9 +184,159 @@ def realizar_retiro_usuario(request, first_name):
         'Tennis': '/static/BetNow/img/Tennis.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'ATM': '/static/BetNow/img/atm.svg',
-        'first_name': first_name
+        'bancos': bancos,
+        'tarjetas': tarjetas,
+        'pses': pses
     }
     return render(request, "BetNow/realizar_retiro_usuario.html", context)
+
+@login_required
+def realizar_retiro(request):
+    if request.method == 'POST':
+        cantidad = Decimal(request.POST.get('cantidad'))  # Convertir a Decimal
+        metodo_transaccion = request.POST.get('metodo-transaccion')
+
+        perfil = request.user.perfil
+        if cantidad <= perfil.saldo:
+            # Restar la cantidad del saldo
+            perfil.saldo -= cantidad
+            perfil.save()
+
+            # Realizar las operaciones correspondientes según el método de transacción seleccionado
+            if metodo_transaccion.startswith('bank-'):
+                # Realizar operaciones para método de banco
+                # ...
+                return redirect('realizar_retiro_usuario')
+            elif metodo_transaccion.startswith('pse-'):
+                # Realizar operaciones para método PSE
+                # ...
+                return redirect('realizar_retiro_usuario')
+
+        else:
+            # Mostrar mensaje de advertencia si la cantidad a retirar es mayor al saldo disponible
+            messages.warning(request, 'La cantidad a retirar es mayor al saldo disponible.')
+
+    return redirect('realizar_retiro_usuario')
+
+@login_required
+def edit_data_user(request):
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'ATM': '/static/BetNow/img/atm.svg'
+    }
+    return render(request, "BetNow/edit_data_user.html", context)
+
+@login_required
+def agregar_dinero(request):
+    user = request.user
+    saldo_actual = user.perfil.saldo  # Obtener el saldo actual del usuario
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'ATM': '/static/BetNow/img/atm.svg',
+        'user': user,
+        'saldo_actual': saldo_actual,
+    }
+    return render(request, "BetNow/agregar_dinero.html", context)
+
+@login_required
+def realizar_agregar_dinero(request):
+    if request.method == 'POST':
+        # Obtener los datos del formulario
+        cantidad = Decimal(request.POST.get('cantidad'))
+        metodo_transaccion = request.POST.get('metodo-transaccion')
+
+        # Realizar las operaciones necesarias, como actualizar el saldo del usuario y crear un registro de depósito
+        user = request.user
+        perfil = user.perfil
+
+        # Actualizar el saldo del usuario
+        perfil.saldo += cantidad
+        perfil.save()
+
+        # Registrar el depósito en el historial
+        deposito = Deposito.objects.create(perfil=perfil, cantidad=cantidad)
+        deposito.save()
+        # Redirigir a la página agregar_dinero.html después de procesar el formulario
+        return redirect('agregar_dinero')
+
+@login_required
+def registrar_metodo_transaccion(request):
+    payment_method = None  # Valor predeterminado
+
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment-method')
+
+        if payment_method == 'banks':
+            banks_form = BancoForm(request.POST)
+            if banks_form.is_valid():
+                banks_form.save()
+                # Redireccionar a la página de éxito o a donde desees
+                return redirect('agregar_dinero')
+
+        elif payment_method == 'pse':
+            pse_form = PSEForm(request.POST)
+            if pse_form.is_valid():
+                pse_form.save()
+                # Redireccionar a la página de éxito o a donde desees
+                return redirect('agregar_dinero')
+
+        elif payment_method == 'card':
+            card_form = TarjetaForm(request.POST)
+            if card_form.is_valid():
+                card_form.save()
+                # Redireccionar a la página de éxito o a donde desees
+                return redirect('agregar_dinero')
+
+    else:
+        banks_form = BancoForm()
+        pse_form = PSEForm()
+        card_form = TarjetaForm()
+
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'banks_form': banks_form,
+        'pse_form': pse_form if payment_method == 'pse' else PSEForm(),
+        'card_form': card_form if payment_method == 'card' else TarjetaForm()
+    }
+
+    return render(request, 'BetNow/registrar_metodo_transaccion.html', context)
+
+
+
+
+@login_required
+def deposito(request):
+    depositos = Deposito.objects.filter(perfil=request.user.perfil)
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'depositos': depositos,
+    }
+    return render(request, "BetNow/deposito.html", context)
+
 
 def logout_view(request):
     logout(request)

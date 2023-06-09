@@ -12,6 +12,7 @@ class Perfil(models.Model):
     documento = models.CharField(max_length=50)
     numero_documento = models.CharField(max_length=50, unique=True)
     fecha_expedicion = models.DateField()
+    saldo = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)  # Nuevo campo de saldo
 
     def __str__(self):
         return self.email
@@ -52,3 +53,10 @@ class Tarjeta(models.Model):
     def __str__(self):
         return self.nombre_titular
 
+class Deposito(models.Model):
+    perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
+    cantidad = models.DecimalField(max_digits=10, decimal_places=2)
+    fecha = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'Deposito: {self.cantidad} - {self.fecha}'

@@ -71,3 +71,19 @@ input[type="number"] {
 .salir:hover {
     background-color: #f55212;
 }
+
+.messages {
+  list-style-type: none;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.messages li {
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.messages.warning li {
+  background-color: #ffe6b3;
+  color: #b35900;
+}

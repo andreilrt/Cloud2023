@@ -1,0 +1,37 @@
+{% extends "BetNow/usuario_inicio.html" %}
+{% load static %}
+{% block stylesheets %}
+{{ block.super }}
+{% endblock %}
+{% block titulo %}
+    <h1 class="titulo">Registrar método de transacción</h1>
+{% endblock %}
+
+{% block body %}
+<body>
+    <form action="{% url 'registrar_metodo_transaccion' %}" method="POST">
+        {% csrf_token %}
+        <label for="payment-method">Medios de transferencia</label>
+        <select id="payment-method" name="payment-method">
+            <option value="" disabled selected hidden>Seleccionar medio de transferencia</option>
+            <option value="banks">Bancos</option>
+            <option value="pse">PSE</option>
+            <option value="card">Tarjeta</option>
+        </select>
+        <div id="banks-panel" class="payment-panel" style="display:none;">
+            {% include 'BetNow/banks.html' %}
+        </div>
+        <div id="pse-panel" class="payment-panel" style="display:none;">
+            {% include 'BetNow/pse.html' %}
+        </div>
+        <div id="card-panel" class="payment-panel" style="display:none;">
+            {% include 'BetNow/tarjeta.html' %}
+        </div>
+        <button type="submit">Enviar</button>
+    </form>
+    {% block scripts %}
+        {{ block.super }}
+        <script src="{% static 'BetNow/js/showpaymentpanel.js' %}"></script>
+    {% endblock %}
+</body>
+{% endblock %}
