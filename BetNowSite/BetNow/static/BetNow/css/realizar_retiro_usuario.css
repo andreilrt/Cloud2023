@@ -1,370 +1,43 @@
-body {
-    background-image: url('/static/BetNow/img/Fondo.svg');
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #00BF63;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    height: 60px;
-}
-
-.logo img {
-    width: 150px;
-}
-
-.logo {
-    transition: all 0.3s;
-}
-
-@keyframes rotateAndJump {
-    0% {
-        transform: translateY(0) rotate(0);
-    }
-    25% {
-        transform: translateY(-10px) rotate(90deg);
-    }
-    50% {
-        transform: translateY(0) rotate(180deg);
-    }
-    75% {
-        transform: translateY(-10px) rotate(270deg);
-    }
-    100% {
-        transform: translateY(0) rotate(360deg);
-    }
-}
-
-.logo:hover {
-    animation: rotateAndJump 1s linear forwards;
-}
-
-.login input {
-    margin-right: 5px;
-}
-
-.login-btn, .signup-btn {
-    background-color: blue;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.signup-btn {
-    margin-left: 5px;
-}
-
-.btn-registro{
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-}
-
-.forgot-password {
-    display: block;
-    font-size: 12px;
-    text-align: right;
-}
-  
-.nav_button {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    border: 1px solid black;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-nav {
-    background-color: #FF5757;
-    display: flex;
-    border: 1px solid black;
-}
-
-nav a {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    padding: 10px;
-    display: inline-block;
-}
-
-nav a:hover {
-    background-color: #D83131;
-}
-
-main {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    padding: 20px;
-}
-
-
-.bets-image {
-    width: 45%;
-}
-
-.Sobre_BetNow {
-    width: 45%;
-    background-color: rgba(255, 255, 255, 0.7);
-    text-align: justify;
-}
-
-
-.horizontal-bar {
-    background-color: #C7633A;
-    width: 100%;
-    height: 50px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sports-hor-bar{
-    text-shadow: 
-    -1px -1px 0 #00BF63,
-    1px -1px 0 #00BF63,
-    -1px  1px 0 #00BF63,
-    1px  1px 0 #00BF63
-}
-
-.sports {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 0;
-}
-
-.sport-wrapper {
-    width: 33.333%;
-    position: relative;
-    transition: all 0.3s;
-}
-
-.sport-wrapper img {
-    width: 100%;
-}
-
-.sport-wrapper span {
-    font-size: 45px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 5px;
-    font-weight: bold;
-    visibility: hidden;
-    opacity: 0;
-    transition: all 0.3s;
-}
-
-.sport-wrapper:hover {
-    transform: scale(1.1);
-    z-index: 10;
-}
-
-.sport-wrapper:hover span {
-    text-shadow: 
-    -1px -1px 0 #d03827,
-    1px -1px 0 #d03827,
-    -1px  1px 0 #d03827,
-    1px  1px 0 #d03827;
-    visibility: visible;
-    opacity: 1;
-    z-index: 11;
-}
-
-.sport-wrapper::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: white;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.sport-wrapper:hover::after {
-    opacity: 0.6;
-}
-
-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 700px;
-    width: 100%;
-}
-
-#login_form{
-    background-color: #00BF63;;
-    margin: 0;
-    padding: 0;
-    border: none;
-    z-index: 0;
-}
-
-.error-message {
-    color: red;
-    display: block;
-    font-size: 8px;
-    text-align: right;
-}
-
-
-
-label[for="show-password"] {
-    font-style: italic;
-    font-size: smaller;
-    font-weight: normal;
-}
-  
-label {
-    display: block;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-#cvv{
-    width: 30%;
-}
-
-#first-name, #last-name, #password, 
-#email, #address,#document-number,
-#city,#pse-email, #account-name,
-#account-number,#pse-document-number,
-#pse-first-name,#pse-last-name,#cardholder-name,
-#card-number,
-input[type="tel"],
-input[type="date"],
-select {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 14px;
-}
-
-.error{
-    color: red;
-}
-
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 20px;
-    width: 100%;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-.phone-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.phone-container label,
-.phone-container select,
-.phone-container input[type="tel"] {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.phone-container input[type="tel"] {
-    margin-right: 0;
-}
-
-footer {
-    background-color: lightgray;
-    padding: 1px;
-    text-align: justify;
-    text-align: center;
-    font-size: 6px;
-}
-
-.welcome {
-    position: absolute;
-    top: 1rem;
-    right: 70px;
-}
-  
-.dropdown-opciones-usuario {
-    position: absolute;
-    top: 70px;
-    right: 10px;
-    display: none;
-    z-index: 9999;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    margin-top: 0px; /* add margin-top to create space between avatar and dropdown */
+.v1_2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0px;
+    justify-items: center;
   }
   
-.dropdown-opciones-usuario li {
-    list-style: none;
-    margin: 5px 0;
-}
-.dropdown-opciones-usuario li a {
-    color: #000;
-    text-decoration: none;
-}
-.user-avatar {
-    position: absolute;
-    top: 1rem;
-    right: 10px;
-    z-index: 9999;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-}
+  
+  .column {
+    flex-basis: calc(33.33% - 20px);
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+  }
 
-.dropdown-opciones-usuario li:hover {
-    background-color: #e6e6e6;
-}
+  .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+  }
+  
+  .atm {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .atm-image {
+    width: 100%;
+    height: auto;
+  }
 
-.v1_2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
 .form-container {
+    width: 50%;
     padding: 20px;
     background-color: #F5F5F5;
     border-radius: 10px;
 }
 
-.title {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
 
 select,
 input[type="number"] {
