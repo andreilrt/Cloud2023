@@ -339,17 +339,24 @@ def retiro(request):
 @login_required
 def realizar_retiro(request):
     if request.method == 'POST':
-        cantidad = Decimal(request.POST.get('cantidad'))  # Convertir a Decimal
+        # Obtener los datos del formulario
+        cantidad = Decimal(request.POST.get('cantidad'))
         metodo_transaccion = request.POST.get('metodo-transaccion')
 
-        perfil = request.user.perfil
+        # Realizar las operaciones necesarias, como actualizar el saldo del usuario y crear un registro de depósito
+        user = request.user
+        perfil = user.perfil
+
+        # Actualizar el saldo del usuario
+        perfil.saldo -= cantidad
+        perfil.save()
 
         if cantidad <= perfil.saldo:
             # Restar la cantidad del saldo
             perfil.saldo -= cantidad
             perfil.save()
-            Retiro = Retiro.objects.create(perfil=perfil, cantidad=cantidad)
-            Retiro.save()
+            retiro = Retiro.objects.create(perfil=perfil, cantidad=cantidad)
+            retiro.save()
 
             # Realizar las operaciones correspondientes según el método de transacción seleccionado
             if metodo_transaccion.startswith('bank-'):
