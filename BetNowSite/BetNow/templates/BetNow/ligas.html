@@ -1,4 +1,4 @@
-{% extends "BetNow/usuario_inicio.html" %}
+{% extends user.is_authenticated|yesno:"BetNow/usuario_inicio.html,BetNow/index.html" %}
 {% load static %}
 {% block stylesheets %}
   {{ block.super }}
