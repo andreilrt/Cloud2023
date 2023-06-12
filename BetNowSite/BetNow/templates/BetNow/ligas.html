@@ -12,18 +12,40 @@
 <body>
     <div class="v1_2">
         <div class="column">
-            <div class="Liga">
-                <img src="{{ Fut }}" alt="Futbol">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{% static 'BetNow/img/Fut.svg' %}" alt="Futbol" class="front-image">
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="{% static 'BetNow/img/PremierLeague.svg' %}" alt="Tenis" class="back-image">
+                        <img src="{% static 'BetNow/img/LaLiga.svg' %}" alt="Tenis" class="back-image">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="column">
-            <div class="Liga">
-                <img src="{{ Bal }}" alt="Baloncesto">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{% static 'BetNow/img/Bal.svg' %}" alt="Baloncesto" class="front-image">
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="{% static 'BetNow/img/NBA.svg' %}" alt="Baloncesto" class="back-image">
+                    </div>
+                </div>
             </div>
         </div>
         <div class="column">
-            <div class="Liga">
-                <img src="{{ Ten }}" alt="Tenis">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="{% static 'BetNow/img/Ten.svg' %}" alt="Tenis" class="front-image">
+                    </div>
+                    <div class="flip-card-back">
+                        <img src="{% static 'BetNow/img/ATP.svg' %}" alt="Futbol" class="back-image">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -32,4 +54,3 @@
     {% endblock %}
 </body>
 {% endblock %}
-
