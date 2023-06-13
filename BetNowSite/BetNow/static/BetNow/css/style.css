@@ -3,6 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    position: relative; /* Agregado */
+    min-height: 100vh; /* Agregado */
 }
 
 header {
@@ -297,6 +299,10 @@ footer {
     text-align: justify;
     text-align: center;
     font-size: 6px;
+    position: absolute; /* Cambiado de relative a absolute */
+    bottom: 0; /* Agregado */
+    left: 0; /* Agregado */
+    width: 100%; /* Agregado */
 }
 
 .welcome {
