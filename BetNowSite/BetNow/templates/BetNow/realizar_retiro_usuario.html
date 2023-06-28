@@ -28,7 +28,7 @@
                 {% if user.perfil.banco_set.exists or user.perfil.tarjeta_set.exists or user.perfil.pse_set.exists %}
                     <form action="{% url 'realizar_retiro' %}" method="POST">
                         {% csrf_token %}
-                        <input type="number" placeholder="Cantidad a agregar" name="cantidad" required>
+                        <input type="number" placeholder="Cantidad a retirar" name="cantidad" required>
                         <select id="metodo-transaccion" name="metodo-transaccion" required>
                             <option value="" disabled selected hidden>Seleccionar un método de transacción</option>
                             {% if user.perfil.banco_set.exists %}
