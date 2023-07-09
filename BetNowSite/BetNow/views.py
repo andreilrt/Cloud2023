@@ -192,17 +192,42 @@ def realizar_retiro_usuario(request):
 
 @login_required
 def edit_data_user(request):
-    context = {
-        'logo': '/static/BetNow/img/logo.svg',
-        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
-        'Basketball': '/static/BetNow/img/Basketball.svg',
-        'Fondo': '/static/BetNow/img/Basketball.svg',
-        'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
-        'Avatar': '/static/BetNow/img/Avatar.svg',
-        'ATM': '/static/BetNow/img/atm.svg'
-    }
-    return render(request, "BetNow/edit_data_user.html", context)
+    if request.method == 'POST':
+        user = request.user
+        perfil = user.perfil
+
+        # Update the user's first name and last name
+        user.first_name = request.POST['first-name']
+        user.last_name = request.POST['last-name']
+        user.username = request.POST['email']
+        user.email = request.POST['email']
+        user.save()
+
+        # Update the perfil information
+        perfil.pais = request.POST['country']
+        perfil.ciudad = request.POST['city']
+        perfil.direccion = request.POST['address']
+        perfil.email = request.POST['email']
+        perfil.indicativo = request.POST['phone-prefix']
+        perfil.celular = request.POST['phone']
+        perfil.save()
+
+        # Redirect to a success page or perform any other desired action
+        return redirect('inicio')
+
+    else:
+        context = {
+            'logo': '/static/BetNow/img/logo.svg',
+            'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+            'Basketball': '/static/BetNow/img/Basketball.svg',
+            'Fondo': '/static/BetNow/img/Basketball.svg',
+            'Futbol': '/static/BetNow/img/Futbol.svg',
+            'Tennis': '/static/BetNow/img/Tennis.svg',
+            'Avatar': '/static/BetNow/img/Avatar.svg',
+            'ATM': '/static/BetNow/img/atm.svg',
+            'user': request.user  # Pass the user object to the template
+        }
+        return render(request, "BetNow/edit_data_user.html", context)
 
 @login_required
 def agregar_dinero(request):

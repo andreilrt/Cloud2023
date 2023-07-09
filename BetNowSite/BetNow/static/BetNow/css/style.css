@@ -229,7 +229,13 @@ label[for="show-password"] {
     font-size: smaller;
     font-weight: normal;
 }
-  
+
+label[for="show-password2"] {
+    font-style: italic;
+    font-size: smaller;
+    font-weight: normal;
+}
+
 label {
     display: block;
     font-weight: bold;
@@ -240,7 +246,7 @@ label {
     width: 30%;
 }
 
-#first-name, #last-name, #password, 
+#first-name, #last-name, #password, #confirm-password, 
 #email, #address,#document-number,
 #city,#pse-email, #account-name,
 #account-number,#pse-document-number,
