@@ -1,4 +1,4 @@
-{% extends "BetNow/usuario_inicio.html" %}
+{% extends user.is_authenticated|yesno:"BetNow/usuario_inicio.html,BetNow/index.html" %}
 {% load static %}
 {% block stylesheets %}
   {{ block.super }}
@@ -12,7 +12,7 @@
 <body>
     <div id="wg-api-football-games"
         data-host="v3.football.api-sports.io"
-        data-key="xxxxxxxxxxxxxxxxxxx"
+        data-key="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         data-league="140"
         data-season="2022"
         data-theme=""
