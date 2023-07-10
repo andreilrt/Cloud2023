@@ -7,6 +7,7 @@ from .forms import BancoForm, PSEForm, TarjetaForm
 from .models import Perfil, Banco, PSE, Tarjeta, Deposito, Retiro
 from django.contrib.auth.models import User
 from decimal import Decimal
+import requests
 
 
 # Create your views here.
@@ -409,6 +410,32 @@ def Ligas(request):
         'Ten': '/static/BetNow/img/Ten.svg',
     }
     return render(request, "BetNow/ligas.html", context)
+
+def show_matches_laliga(request):
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg'
+    }
+
+    return render(request, "BetNow/laliga.html", context)
+
+def show_matches_premierleague(request):
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg'
+    }
+
+    return render(request, "BetNow/premierleague.html", context)
 
 def logout_view(request):
     logout(request)

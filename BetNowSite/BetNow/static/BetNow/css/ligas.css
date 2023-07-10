@@ -153,12 +153,18 @@
 }
 
 .flip-card-back .back-image {
-  max-width: 30%;
-  max-height: 30%;
+  max-width: 50%;
+  max-height: 50%;
 }
 
 .flip-card-back .back-image:hover {
   transform: scale(1.4);
   border: 2px solid #a3f2a0;
   background-color: #a3f2a0;
+}
+
+.image-link {
+  display: inline-block;
+  padding: 0;
+  border: none;
 }

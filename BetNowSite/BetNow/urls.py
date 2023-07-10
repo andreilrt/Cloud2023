@@ -19,4 +19,6 @@ urlpatterns = [
     path('deposito', views.deposito, name='deposito'),
     path('retiro', views.retiro, name='retiro'),
     path('ligas', views.Ligas, name='ligas'),
+    path('laliga',views.show_matches_laliga, name="laliga"),
+    path('premierleague',views.show_matches_premierleague, name="premierleague"),
 ]

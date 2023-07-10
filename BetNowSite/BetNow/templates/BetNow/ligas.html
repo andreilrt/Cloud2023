@@ -18,8 +18,13 @@
                         <img src="{% static 'BetNow/img/Fut.svg' %}" alt="Futbol" class="front-image">
                     </div>
                     <div class="flip-card-back">
-                        <img src="{% static 'BetNow/img/PremierLeague.svg' %}" alt="Tenis" class="back-image">
-                        <img src="{% static 'BetNow/img/LaLiga.svg' %}" alt="Tenis" class="back-image">
+                        <a href="{% url 'laliga' %}" class="image-link">
+                            <img src="{% static 'BetNow/img/LaLiga.svg' %}" alt="LaLiga" class="back-image">
+                        </a>
+                        
+                        <a href="{% url 'premierleague' %}" class="image-link">
+                            <img src="{% static 'BetNow/img/PremierLeague.svg' %}" alt="Premier League" class="back-image">
+                        </a>                        
                     </div>
                 </div>
             </div>
