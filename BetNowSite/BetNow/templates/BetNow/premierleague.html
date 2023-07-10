@@ -1,34 +1,9 @@
-{% extends user.is_authenticated|yesno:"BetNow/usuario_inicio.html,BetNow/index.html" %}
-{% load static %}
-{% block stylesheets %}
-  {{ block.super }}
-  <link rel="stylesheet" href="{% static 'BetNow/css/consultas_usuario.css' %}">
-{% endblock %}
+{% extends "BetNow/soccer_matches.html" %}
+
 {% block titulo %}
-    <h1 class="titulo">PREMIER LIGUE</h1>
+    <h1 class="titulo">Premier League</h1>
 {% endblock %}
 
 {% block body %}
-<body>
-    <div id="wg-api-football-games"
-        data-host="v3.football.api-sports.io"
-        data-key="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        data-league="39"
-        data-season="2022"
-        data-theme=""
-        data-refresh="0"
-        data-show-errors="false"
-        data-show-logos="true"
-        data-modal-game="true"
-        data-modal-standings="true"
-        data-modal-show-logos="true">
-    </div>
-    <script
-        type="module"
-        src="https://widgets.api-sports.io/2.0.3/widgets.js">
-    </script>
-    {% block scripts %}
-        {{ block.super }}
-    {% endblock %}
-</body>
+    {{ block.super }}
 {% endblock %}

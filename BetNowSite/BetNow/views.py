@@ -412,6 +412,8 @@ def Ligas(request):
     return render(request, "BetNow/ligas.html", context)
 
 def show_matches_laliga(request):
+    league_id = "140"
+    season = "2022"
     context = {
         'logo': '/static/BetNow/img/logo.svg',
         'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
@@ -419,12 +421,16 @@ def show_matches_laliga(request):
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
         'Tennis': '/static/BetNow/img/Tennis.svg',
-        'Avatar': '/static/BetNow/img/Avatar.svg'
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'league_id': league_id,
+        'season': season,
     }
 
     return render(request, "BetNow/laliga.html", context)
 
 def show_matches_premierleague(request):
+    league_id = "39"
+    season = "2022"
     context = {
         'logo': '/static/BetNow/img/logo.svg',
         'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
@@ -432,7 +438,9 @@ def show_matches_premierleague(request):
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
         'Tennis': '/static/BetNow/img/Tennis.svg',
-        'Avatar': '/static/BetNow/img/Avatar.svg'
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'league_id': league_id,
+        'season': season,
     }
 
     return render(request, "BetNow/premierleague.html", context)
