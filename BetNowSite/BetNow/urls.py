@@ -21,4 +21,6 @@ urlpatterns = [
     path('ligas', views.Ligas, name='ligas'),
     path('laliga',views.show_matches_laliga, name="laliga"),
     path('premierleague',views.show_matches_premierleague, name="premierleague"),
+    path('NBA',views.show_matches_NBA, name="NBA"),
+    path('MLB',views.show_matches_MLB, name="MLB"),
 ]

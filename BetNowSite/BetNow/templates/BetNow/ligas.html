@@ -36,7 +36,9 @@
                         <img src="{% static 'BetNow/img/Bal.svg' %}" alt="Baloncesto" class="front-image">
                     </div>
                     <div class="flip-card-back">
-                        <img src="{% static 'BetNow/img/NBA.svg' %}" alt="Baloncesto" class="back-image">
+                        <a href="{% url 'NBA' %}" class="image-link">
+                            <img src="{% static 'BetNow/img/NBA.svg' %}" alt="Baloncesto" class="back-image">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -45,10 +47,12 @@
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <img src="{% static 'BetNow/img/Ten.svg' %}" alt="Tenis" class="front-image">
+                        <img src="{% static 'BetNow/img/Baseb.svg' %}" alt="Tenis" class="front-image">
                     </div>
                     <div class="flip-card-back">
-                        <img src="{% static 'BetNow/img/ATP.svg' %}" alt="Futbol" class="back-image">
+                        <a href="{% url 'MLB' %}" class="image-link">
+                            <img src="{% static 'BetNow/img/MLB.svg' %}" alt="Futbol" class="back-image">
+                        </a>
                     </div>
                 </div>
             </div>
