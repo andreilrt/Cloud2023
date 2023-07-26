@@ -222,8 +222,6 @@ form {
     text-align: right;
 }
 
-
-
 label[for="show-password"] {
     font-style: italic;
     font-size: smaller;
@@ -359,3 +357,15 @@ footer {
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+.error-registro-metodo-transaccion {
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border: 1px solid #f5c6cb;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }

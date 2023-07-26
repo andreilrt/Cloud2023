@@ -1,7 +1,7 @@
 {% extends "BetNow/usuario_inicio.html" %}
 {% load static %}
 {% block stylesheets %}
-{{ block.super }}
+    {{ block.super }}
 {% endblock %}
 {% block titulo %}
     <h1 class="titulo">Registrar método de transacción</h1>
@@ -28,6 +28,11 @@
             {% include 'BetNow/tarjeta.html' %}
         </div>
         <button type="submit">Enviar</button>
+        {% if error_message %}
+        <div class="error-registro-metodo-transaccion">
+            {{ error_message }}
+        </div>
+        {% endif %}
     </form>
     {% block scripts %}
         {{ block.super }}

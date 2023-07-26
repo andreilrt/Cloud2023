@@ -46,7 +46,7 @@ class PSE(models.Model):
 class Tarjeta(models.Model):
     perfil = models.ForeignKey(Perfil, on_delete=models.CASCADE)
     nombre_titular = models.CharField(max_length=100)
-    numero_tarjeta = models.CharField(max_length=16)
+    numero_tarjeta = models.CharField(max_length=16, unique=True)
     fecha_expiracion = models.DateField()
     cvv = models.CharField(max_length=4)
 

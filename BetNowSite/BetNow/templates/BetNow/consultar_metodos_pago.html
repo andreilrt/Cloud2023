@@ -1,0 +1,65 @@
+{% extends "BetNow/usuario_inicio.html" %}
+{% load static %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'BetNow/css/consultas_usuario.css' %}">
+{% endblock %}
+
+{% block titulo %}
+    <h1 class="titulo">Consultar Métodos de Pago</h1>
+{% endblock %}
+
+{% block body %}
+    <table>
+        <thead>
+            <tr>
+                <th>Método</th>
+                <th>Banco</th>
+                <th>Nombre del Titular</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for banco in bancos %}
+                <tr>
+                    <td>Bancos</td>
+                    <td>{{ banco.nombre_banco }}</td>
+                    <td>{{ banco.nombre_titular }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_banco' banco.id %}" class="eliminar">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            {% for pse in pses %}
+                <tr>
+                    <td>PSE</td>
+                    <td>{{ pse.banco }}</td>
+                    <td>{{ pse.nombre }} {{ pse.apellido }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_pse' pse.id %}" class="eliminar">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+
+            {% for tarjeta in tarjetas %}
+                <tr>
+                    <td>Tarjeta</td>
+                    <td></td>
+                    <td>{{ tarjeta.nombre_titular }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_tarjeta' tarjeta.id %}" class="eliminar">Eliminar</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'registrar_metodo_transaccion' %}" class="agregar-btn">Agregar un nuevo método de pago</a>
+
+{% block scripts %}
+    {{ block.super }}
+{% endblock %}
+{% endblock %}
+

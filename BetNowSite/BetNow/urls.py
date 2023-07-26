@@ -23,4 +23,8 @@ urlpatterns = [
     path('premierleague',views.show_matches_premierleague, name="premierleague"),
     path('NBA',views.show_matches_NBA, name="NBA"),
     path('MLB',views.show_matches_MLB, name="MLB"),
+    path('consultar_metodos_pago', views.consultar_metodos_pago, name='consultar_metodos_pago'),
+    path('eliminar_banco/<int:banco_id>', views.eliminar_banco, name='eliminar_banco'),
+    path('eliminar_pse/<int:pse_id>', views.eliminar_pse, name='eliminar_pse'),
+    path('eliminar_tarjeta/<int:tarjeta_id>', views.eliminar_tarjeta, name='eliminar_tarjeta'),
 ]

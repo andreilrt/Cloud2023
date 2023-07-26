@@ -123,3 +123,68 @@
 .btn:hover {
   opacity: 0.7;
 }
+
+.agregar-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ffa200;
+  color: #333;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.agregar-btn:hover {
+  background-color: #d18616;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffffaf; 
+}
+
+th, td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+a.eliminar {
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+a.eliminar:hover {
+  background-color: darkred;
+}
+
+.btn-salir {
+  width: 200px;
+  margin-top: 30px;
+  align-self: flex-end;
+  background-color: red;
+  color: #333;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.btn-salir:hover {
+  background-color: #b71c1c;
+}

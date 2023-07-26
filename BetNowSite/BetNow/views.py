@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -7,7 +6,7 @@ from .forms import BancoForm, PSEForm, TarjetaForm
 from .models import Perfil, Banco, PSE, Tarjeta, Deposito, Retiro
 from django.contrib.auth.models import User
 from decimal import Decimal
-import requests
+from datetime import datetime
 
 
 # Create your views here.
@@ -31,7 +30,7 @@ def index(request):
                 'Basketball': '/static/BetNow/img/Basketball.svg',
                 'Fondo': '/static/BetNow/img/Basketball.svg',
                 'Futbol': '/static/BetNow/img/Futbol.svg',
-                'Tennis': '/static/BetNow/img/Tennis.svg',
+                'Baseball': '/static/BetNow/img/Baseball.svg',
             }
             return render(request, 'BetNow/index.html', context)
     else:
@@ -41,7 +40,7 @@ def index(request):
             'Basketball': '/static/BetNow/img/Basketball.svg',
             'Fondo': '/static/BetNow/img/Basketball.svg',
             'Futbol': '/static/BetNow/img/Futbol.svg',
-            'Tennis': '/static/BetNow/img/Tennis.svg',
+            'Baseball': '/static/BetNow/img/Baseball.svg',
         }
         return render(request, "BetNow/index.html", context)
 
@@ -113,7 +112,7 @@ def Registro(request):
             'Basketball': '/static/BetNow/img/Basketball.svg',
             'Fondo': '/static/BetNow/img/Basketball.svg',
             'Futbol': '/static/BetNow/img/Futbol.svg',
-            'Tennis': '/static/BetNow/img/Tennis.svg',
+            'Baseball': '/static/BetNow/img/Baseball.svg',
             'Avatar': '/static/BetNow/img/Avatar.svg'
         }
 
@@ -130,7 +129,7 @@ def Registro(request):
                 'Basketball': '/static/BetNow/img/Basketball.svg',
                 'Fondo': '/static/BetNow/img/Basketball.svg',
                 'Futbol': '/static/BetNow/img/Futbol.svg',
-                'Tennis': '/static/BetNow/img/Tennis.svg',
+                'Baseball': '/static/BetNow/img/Baseball.svg',
             }
             return render(request, 'BetNow/index.html', context)
     else:
@@ -148,7 +147,7 @@ def index_usuario(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg'
     }
     return render(request, "BetNow/usuario_inicio.html", context)
@@ -161,7 +160,7 @@ def consultas_usuario(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'ATM': '/static/BetNow/img/atm.svg',
         'saldo': request.user.perfil.saldo,  # Agrega el saldo actual del usuario al contexto
@@ -182,7 +181,7 @@ def realizar_retiro_usuario(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'ATM': '/static/BetNow/img/atm.svg',
         'bancos': bancos,
@@ -223,7 +222,7 @@ def edit_data_user(request):
             'Basketball': '/static/BetNow/img/Basketball.svg',
             'Fondo': '/static/BetNow/img/Basketball.svg',
             'Futbol': '/static/BetNow/img/Futbol.svg',
-            'Tennis': '/static/BetNow/img/Tennis.svg',
+            'Baseball': '/static/BetNow/img/Baseball.svg',
             'Avatar': '/static/BetNow/img/Avatar.svg',
             'ATM': '/static/BetNow/img/atm.svg',
             'user': request.user  # Pass the user object to the template
@@ -240,7 +239,7 @@ def agregar_dinero(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'ATM': '/static/BetNow/img/atm.svg',
         'user': user,
@@ -282,13 +281,35 @@ def registrar_metodo_transaccion(request):
     if payment_method == 'banks':
         if 'colombian-banks' in request.POST:
             # Process bank information
-            banco_nombre = request.POST['colombian-banks']
+            nombre_banco = request.POST['colombian-banks']
             titular = request.POST['account-name']
             numero_cuenta = request.POST['account-number']
             tipo_cuenta = request.POST['account-type']
-            banco = Banco.objects.create(perfil=perfil, nombre_titular=titular, numero_cuenta=numero_cuenta, tipo_cuenta=tipo_cuenta, nombre_banco=banco_nombre)
-            banco.save()
-            return redirect('inicio')
+            try:
+                # Verificar si ya existe una tarjeta con el mismo número
+                tarjeta_existente = Banco.objects.get(numero_cuenta=numero_cuenta, tipo_cuenta=tipo_cuenta, nombre_banco=nombre_banco)
+                # Si existe, mostrar un mensaje de error en el template
+                error_message = 'Ya existe una cuenta con este número en el registro.'
+                context = {
+                    'error_message': error_message,
+                    'logo': '/static/BetNow/img/logo.svg',
+                    'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+                    'Basketball': '/static/BetNow/img/Basketball.svg',
+                    'Fondo': '/static/BetNow/img/Basketball.svg',
+                    'Futbol': '/static/BetNow/img/Futbol.svg',
+                    'Baseball': '/static/BetNow/img/Baseball.svg',
+                    'Avatar': '/static/BetNow/img/Avatar.svg',
+                    'banks_form': banks_form,
+                    'pse_form': pse_form,
+                    'card_form': card_form
+                }
+                return render(request, 'BetNow/registrar_metodo_transaccion.html', context)
+
+            except Banco.DoesNotExist:
+                banco = Banco.objects.create(perfil=perfil, nombre_titular=titular, numero_cuenta=numero_cuenta, tipo_cuenta=tipo_cuenta, nombre_banco=nombre_banco)
+                banco.save()
+                return redirect('consultar_metodos_pago')
+
 
     elif payment_method == 'pse':
         if 'pse-bank' in request.POST:
@@ -302,19 +323,44 @@ def registrar_metodo_transaccion(request):
             correo_electronico = request.POST['pse-email']
             pse = PSE.objects.create(perfil=perfil, banco=banco, tipo_cuenta=tipo_cuenta, tipo_documento=tipo_documento, numero_documento=numero_documento, nombre=nombre, apellido=apellido, correo_electronico=correo_electronico)
             pse.save()
-            return redirect('inicio')
+            return redirect('consultar_metodos_pago')
 
     elif payment_method == 'card':
         if 'cardholder-name' in request.POST:
             # Process card information
             nombre_titular = request.POST['cardholder-name']
             numero_tarjeta = request.POST['card-number']
-            fecha_expiracion = request.POST['month'] + '/' + request.POST['year']
+            expiracion_mes = request.POST['month']
+            expiracion_anio = request.POST['year']
+            # Crear objeto datetime con el primer día del mes de expiración
+            fecha_expiracion = datetime(int(expiracion_anio), int(expiracion_mes), 1).strftime('%Y-%m-%d')
             cvv = request.POST['cvv']
-            tarjeta = Tarjeta.objects.create(perfil=perfil, nombre_titular=nombre_titular, numero_tarjeta=numero_tarjeta, fecha_expiracion=fecha_expiracion, cvv=cvv)
-            tarjeta.save()
-            return redirect('inicio')
 
+            try:
+                # Verificar si ya existe una tarjeta con el mismo número
+                tarjeta_existente = Tarjeta.objects.get(numero_tarjeta=numero_tarjeta)
+                # Si existe, mostrar un mensaje de error en el template
+                error_message = 'Ya existe una tarjeta con este número.'
+                context = {
+                    'error_message': error_message,
+                    'logo': '/static/BetNow/img/logo.svg',
+                    'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+                    'Basketball': '/static/BetNow/img/Basketball.svg',
+                    'Fondo': '/static/BetNow/img/Basketball.svg',
+                    'Futbol': '/static/BetNow/img/Futbol.svg',
+                    'Baseball': '/static/BetNow/img/Baseball.svg',
+                    'Avatar': '/static/BetNow/img/Avatar.svg',
+                    'banks_form': banks_form,
+                    'pse_form': pse_form,
+                    'card_form': card_form
+                }
+                return render(request, 'BetNow/registrar_metodo_transaccion.html', context)
+
+            except Tarjeta.DoesNotExist:
+                # Si no existe, crear y guardar la nueva tarjeta
+                tarjeta = Tarjeta.objects.create(perfil=perfil, nombre_titular=nombre_titular, numero_tarjeta=numero_tarjeta, fecha_expiracion=fecha_expiracion, cvv=cvv)
+                tarjeta.save()
+                return redirect('consultar_metodos_pago')
 
     context = {
         'logo': '/static/BetNow/img/logo.svg',
@@ -322,7 +368,7 @@ def registrar_metodo_transaccion(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'banks_form': banks_form,
         'pse_form': pse_form,
@@ -331,6 +377,45 @@ def registrar_metodo_transaccion(request):
 
     return render(request, 'BetNow/registrar_metodo_transaccion.html', context)
 
+@login_required
+def consultar_metodos_pago(request):
+    user = request.user
+    bancos = Banco.objects.filter(perfil__user=user)
+    pses = PSE.objects.filter(perfil__user=user)
+    tarjetas = Tarjeta.objects.filter(perfil__user=user)
+
+    context = {
+        'bancos': bancos,
+        'pses': pses,
+        'tarjetas': tarjetas,
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+    }
+
+    return render(request, 'BetNow/consultar_metodos_pago.html', context)
+
+@login_required
+def eliminar_banco(request, banco_id):
+    banco = get_object_or_404(Banco, id=banco_id)
+    banco.delete()
+    return redirect('consultar_metodos_pago')
+
+@login_required
+def eliminar_pse(request, pse_id):
+    pse = get_object_or_404(PSE, id=pse_id)
+    pse.delete()
+    return redirect('consultar_metodos_pago')
+
+@login_required
+def eliminar_tarjeta(request, tarjeta_id):
+    tarjeta = get_object_or_404(Tarjeta, id=tarjeta_id)
+    tarjeta.delete()
+    return redirect('consultar_metodos_pago')
 
 @login_required
 def deposito(request):
@@ -341,7 +426,7 @@ def deposito(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'depositos': depositos,
     }
@@ -356,7 +441,7 @@ def retiro(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'Retiros': retiros,
     }
@@ -403,7 +488,7 @@ def Ligas(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'Fut': '/static/BetNow/img/Fut.svg',
         'Bal': '/static/BetNow/img/Bal.svg',
@@ -422,7 +507,7 @@ def show_matches_laliga(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'league_id': league_id,
         'season': season,
@@ -443,7 +528,7 @@ def show_matches_premierleague(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'league_id': league_id,
         'season': season,
@@ -464,7 +549,7 @@ def show_matches_NBA(request):
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'league_id': league_id,
         'season': season,
@@ -478,14 +563,14 @@ def show_matches_MLB(request):
     id="wg-api-baseball-games"
     data_host="v1.baseball.api-sports.io"
     league_id = "1"
-    season = "b2023"
+    season = "2023"
     context = {
         'logo': '/static/BetNow/img/logo.svg',
         'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
         'Basketball': '/static/BetNow/img/Basketball.svg',
         'Fondo': '/static/BetNow/img/Basketball.svg',
         'Futbol': '/static/BetNow/img/Futbol.svg',
-        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Baseball': '/static/BetNow/img/Baseball.svg',
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'league_id': league_id,
         'season': season,

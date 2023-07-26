@@ -28,10 +28,11 @@
             </div>
         </div>
         <div class="column">
-            <div class="ir_inicio">
-                <div class="title">Ir a inicio</div>
-                <button type="button" class="btn salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
+            <div class="title">Consultar mis metodos de transacción</div>
+            <div class="buttons">
+                <button type="button" class="metodo_btn" id="metodo_btn" data-url="{% url 'consultar_metodos_pago' %}">Medios registrados</button>
             </div>
+            <button type="button" class="btn salir" id="salir-button" data-url="{% url 'inicio' %}">Salir</button>
         </div>
     </div>
     {% block scripts %}
