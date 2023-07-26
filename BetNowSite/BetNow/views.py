@@ -412,6 +412,8 @@ def Ligas(request):
     return render(request, "BetNow/ligas.html", context)
 
 def show_matches_laliga(request):
+    id="wg-api-football-games"
+    data_host="v3.football.api-sports.io"
     league_id = "140"
     season = "2022"
     context = {
@@ -424,11 +426,15 @@ def show_matches_laliga(request):
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'league_id': league_id,
         'season': season,
+        'id':id,
+        'data_host':data_host,
     }
 
     return render(request, "BetNow/laliga.html", context)
 
 def show_matches_premierleague(request):
+    id="wg-api-football-games"
+    data_host="v3.football.api-sports.io"
     league_id = "39"
     season = "2022"
     context = {
@@ -441,9 +447,53 @@ def show_matches_premierleague(request):
         'Avatar': '/static/BetNow/img/Avatar.svg',
         'league_id': league_id,
         'season': season,
+        'id':id,
+        'data_host':data_host,
     }
 
     return render(request, "BetNow/premierleague.html", context)
+
+def show_matches_NBA(request):
+    id="wg-api-basketball-games"
+    data_host="v1.basketball.api-sports.io"
+    league_id = "12"
+    season = "2022-2023"
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'league_id': league_id,
+        'season': season,
+        'id':id,
+        'data_host':data_host,
+    }
+
+    return render(request, "BetNow/nba_matches.html", context)
+
+def show_matches_MLB(request):
+    id="wg-api-baseball-games"
+    data_host="v1.baseball.api-sports.io"
+    league_id = "1"
+    season = "b2023"
+    context = {
+        'logo': '/static/BetNow/img/logo.svg',
+        'Bet_Inicio': '/static/BetNow/img/Bet_Inicio.svg',
+        'Basketball': '/static/BetNow/img/Basketball.svg',
+        'Fondo': '/static/BetNow/img/Basketball.svg',
+        'Futbol': '/static/BetNow/img/Futbol.svg',
+        'Tennis': '/static/BetNow/img/Tennis.svg',
+        'Avatar': '/static/BetNow/img/Avatar.svg',
+        'league_id': league_id,
+        'season': season,
+        'id':id,
+        'data_host':data_host,
+    }
+
+    return render(request, "BetNow/nba_matches.html", context)
 
 def logout_view(request):
     logout(request)
